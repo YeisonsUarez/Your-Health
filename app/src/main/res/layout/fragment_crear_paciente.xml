@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:isScrollContainer="true"
+    android:scrollbars="horizontal"
+    app:layout_scrollFlags="scroll"
+    tools:context=".fragmentosAdmin.CrearPaciente">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/horarios">
+
+        <ImageButton
+            android:id="@+id/btnCamera"
+            android:layout_width="96dp"
+            android:layout_height="83dp"
+            android:backgroundTint="@android:color/transparent"
+            android:elevation="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.208" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.763">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/crearPacienteAdm"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="115dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/buttonfinalizar"
+                    android:text="@string/textCrear"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.97" />
+
+                <EditText
+                    android:id="@+id/numeroDocCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textNumeroDoc"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.481"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.322" />
+
+                <EditText
+                    android:id="@+id/nombreDocCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/nombre"
+                    android:inputType="textPersonName"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.481"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.429" />
+
+                <EditText
+                    android:id="@+id/edadCrearPaciente"
+                    android:layout_width="100dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textEdad"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.138"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.546" />
+
+                <EditText
+                    android:id="@+id/telefonoCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textTelefono"
+                    android:inputType="phone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.481"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.663" />
+
+                <EditText
+                    android:id="@+id/emailCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textemail"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.481"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.767" />
+
+                <EditText
+                    android:id="@+id/contrasenaCrearPacienteAdm"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textPassword"
+                    android:inputType="textPassword"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.506"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.875" />
+
+                <ImageButton
+                    android:id="@+id/cancelarCrearPaciente"
+                    android:layout_width="63dp"
+                    android:layout_height="59dp"
+                    android:background="@color/colorPrimary"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/cancelar"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.95"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.031" />
+
+                <Spinner
+                    android:id="@+id/tipoDocCrearPaciente"
+                    android:layout_width="312dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/editnext"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.493"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.215" />
+
+                <Spinner
+                    android:id="@+id/selectorSexoPaciente"
+                    android:layout_width="100dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/editnext"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.833"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.546" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoCrearPaciente"
+            android:layout_width="172dp"
+            android:layout_height="187dp"
+            android:elevation="7dp"
+            android:src="@drawable/fondoperfil"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
