@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:isScrollContainer="true"
+        android:scrollbars="horizontal"
+        app:layout_scrollFlags="scroll"
+        tools:context=".fragmentosAdmin.CrearMedico">
+
+
+        <ImageButton
+            android:id="@+id/cancelarCrearMedico"
+            android:layout_width="63dp"
+            android:layout_height="59dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.031"
+            android:elevation="3dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/pasoCuatroMedico"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fondovercitas"
+            android:visibility="invisible">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:cardBackgroundColor="@color/colorAccent"
+                app:cardCornerRadius="20dp"
+                app:cardUseCompatPadding="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/crearMedico"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorPrimary"
+                        android:text="@string/textCrear"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.938"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.947" />
+
+                    <Button
+                        android:id="@+id/atrasPasoCuatro"
+                        android:layout_width="65dp"
+                        android:layout_height="49dp"
+                        android:background="@drawable/retroceder"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.057"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.938" />
+
+                    <TextView
+                        android:id="@+id/textView152"
+                        android:layout_width="295dp"
+                        android:layout_height="68dp"
+                        android:background="@drawable/editnight"
+                        android:gravity="center"
+                        android:text="@string/textElegirCupoAdmin"
+                        android:textColor="#FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.601"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.049" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cuposCrearMedico"
+                        android:layout_width="360dp"
+                        android:layout_height="500dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.573" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoTresMedico"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fotoperfildoctor"
+        android:visibility="invisible">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/atrasPasoTres"
+                    android:layout_width="66dp"
+                    android:layout_height="43dp"
+                    android:background="@drawable/retroceder"
+                    android:backgroundTint="@color/colorAccent"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.072"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.91" />
+
+                <Button
+                    android:id="@+id/siguienteTresCrearMedico"
+                    android:layout_width="132dp"
+                    android:layout_height="51dp"
+                    android:background="@drawable/buttonfinalizar"
+                    android:text="@string/siguiente"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.919"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.921" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="295dp"
+                    android:layout_height="68dp"
+                    android:background="@drawable/editnext"
+                    android:gravity="center"
+                    android:text="@string/textElegirTipoCitaDoctorAdmin"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.601"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.049" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listaAreasAtencion"
+                    android:layout_width="349dp"
+                    android:layout_height="476dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoDosMedico"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondoperfil"
+        android:visibility="invisible">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/siguienteDosCrearMedico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/siguiente"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.896"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.702" />
+
+                <Button
+                    android:id="@+id/atrasPasoDos"
+                    android:layout_width="70dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/retroceder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.088"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.931" />
+
+                <EditText
+                    android:id="@+id/telefonoCrearMedico"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textTelefono"
+                    android:inputType="phone"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.604"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.083" />
+
+                <EditText
+                    android:id="@+id/detalleCrearMedico"
+                    android:layout_width="315dp"
+                    android:layout_height="78dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/detalle"
+                    android:inputType="textMultiLine"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.614"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.521" />
+
+                <EditText
+                    android:id="@+id/contrasenaCrearMedicoAdm"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textPassword"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.604"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.288" />
+
+                <EditText
+                    android:id="@+id/confirmarContrasenaDoc"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/editnight"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textPassword"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.607"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.389" />
+
+                <EditText
+                    android:id="@+id/emailCrearMedico"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textemail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.604"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.182" />
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="201dp"
+                    android:layout_height="332dp"
+                    android:src="@drawable/doctorcuatro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.146" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="193dp"
+                    android:layout_height="321dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/doctordos"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.004"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.198" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoUnoMedico"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/horarios"
+        android:visibility="visible">
+
+        <ImageButton
+            android:id="@+id/tomarFotoMedico"
+            android:layout_width="96dp"
+            android:layout_height="83dp"
+            android:backgroundTint="@android:color/transparent"
+            android:elevation="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/camera"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.695"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.208" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="422dp"
+            android:layout_height="562dp"
+            app:cardBackgroundColor="@color/colorPrimary"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.763">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/siguienteCrearMedicoUno"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="115dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/buttonfinalizar"
+                    android:text="@string/siguiente"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.84" />
+
+                <EditText
+                    android:id="@+id/numeroDocCrearMedico"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textNumeroDoc"
+                    android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.374" />
+
+                <EditText
+                    android:id="@+id/nombreDocCrearMedico"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/nombre"
+                    android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.534" />
+
+                <EditText
+                    android:id="@+id/edadCrearMedico"
+                    android:layout_width="100dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnext"
+                    android:elevation="2dp"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textEdad"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.15"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.684" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="108dp"
+                    android:layout_height="354dp"
+                    android:src="@drawable/doctorcita"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.978"
+                    app:srcCompat="@drawable/doctortres" />
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="116dp"
+                    android:layout_height="362dp"
+                    android:src="@drawable/doctorcita"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.831"
+                    app:srcCompat="@drawable/doctora" />
+
+                <Spinner
+                    android:id="@+id/selectorSexoMedico"
+                    android:layout_width="100dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/editnext"
+                    android:elevation="2dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.852"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.682" />
+
+                <Spinner
+                    android:id="@+id/tipoDocCrearMedico"
+                    android:layout_width="312dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/editnext"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.493"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.215" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoCrearMedico"
+            android:layout_width="172dp"
+            android:layout_height="187dp"
+            android:elevation="7dp"
+            android:src="@drawable/fondoperfil"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>

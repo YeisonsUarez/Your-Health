@@ -29,7 +29,6 @@ import co.edu.unab.hernandez.yeison.your_health.modelos.Usuario;
  * A simple {@link Fragment} subclass.
  */
 public class Usuarios extends Fragment {
-    private Switch tipoUsuario;
     private RecyclerView listadeUsuarios;
     private FloatingActionMenu anadirUsuarios;
     private FloatingActionButton btnPaciente,btnMedico;
@@ -50,8 +49,6 @@ public class Usuarios extends Fragment {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_usuarios, container, false);
        asociarElementos();
-        transaction= getActivity().getSupportFragmentManager().beginTransaction();
-        crearPaciente= new CrearPaciente();
        operacionesDeBotones();
 
         return view;
@@ -62,13 +59,13 @@ public class Usuarios extends Fragment {
         btnPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mostrarDialogPaciente();
+                mostrarFragmentCrearPaciente();
             }
         });
         btnMedico.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Cliack en Medico", Toast.LENGTH_SHORT).show();
+                mostrarFragmentCrearMedico();;
             }
         });
         tipoUsuarioSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -116,14 +113,32 @@ public class Usuarios extends Fragment {
         adapter.notifyDataSetChanged();
         listadeUsuarios.setAdapter(adapter);
     }
-    public void mostrarDialogPaciente(){
-        transaction.add(R.id.frameLayoutUsuarios,crearPaciente);
-        transaction.addToBackStack(null);
-        transaction.commit();
+    public void mostrarFragmentCrearPaciente(){
+        transaction= getActivity().getSupportFragmentManager().beginTransaction();
+        if(crearPaciente!=null){
+            transaction.replace(R.id.frameLayoutUsuarios,crearPaciente).addToBackStack(null).commit();
+        }else{
+            crearPaciente= new CrearPaciente();
+            transaction.add(R.id.frameLayoutUsuarios,crearPaciente);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
+    }
+    public  void mostrarFragmentCrearMedico(){
+        transaction= getActivity().getSupportFragmentManager().beginTransaction();
+        if(crearMedico!=null){
+            transaction.replace(R.id.frameLayoutUsuarios,crearMedico).addToBackStack(null).commit();
+        }else{
+            crearMedico= new CrearMedico();
+            transaction.add(R.id.frameLayoutUsuarios,crearMedico);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+
     }
 
     private void asociarElementos(){
-        tipoUsuario= view.findViewById(R.id.seleccionUsuario);
         listadeUsuarios= view.findViewById(R.id.listaUsuarios);
         anadirUsuarios= view.findViewById(R.id.menuButton);
         anadirUsuarios.setClosedOnTouchOutside(true);
@@ -134,4 +149,5 @@ public class Usuarios extends Fragment {
 
         listadeUsuarios.setLayoutManager(manager);
     }
+
 }

@@ -10,11 +10,7 @@ import android.view.ViewGroup;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link verPaciente#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class verPaciente extends Fragment {
 
     public verPaciente() {

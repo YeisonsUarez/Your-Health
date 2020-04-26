@@ -83,4 +83,27 @@
     <string name="textclick">Click para ver detalles del usuario.</string>
     <string name="textTelefono">Número de celular</string>
     <string name="textemail">Correo electronico</string>
+    <string name="mensajeDialogoFoto">Elige por cuál media deseas añadir la foto de usuario</string>
+    <string name="textTomarFoto">Tomar Foto</string>
+    <string name="textGaleria">Seleccionar foto de galeria</string>
+    <string-array name="tiposDocumentos">
+        <item>Seleccione un tipo de documento</item>
+        <item>Registro Civil</item>
+        <item>Tarjeta de identidad.</item>
+        <item>Cedula de Ciudadania</item>
+        <item>Cédula de extranjería</item>
+        <item>Pasaporte</item>
+        <item>Indentificador laboral</item>
+    </string-array>
+    <string-array name="tipoSexo">
+        <item>Selecciona el sexo del usuario</item>
+        <item>Masculino</item>
+        <item>Femenino</item>
+    </string-array>
+    <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s ?.</string>
+    <string name="confirmarSeleccionCupo"> Información de Cupo:\n Hora:  %1$s \n Lugar: %2$s\n ¿Desea añadirlo al medico %3$s ?</string>
+<string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Al finalizar da click en siguiente.</string>
+<string name="textElegirCupoAdmin">Por favor selecciona los cupos en los que el médico trabajará.\n Al finalizar da click en siguiente.</string>
+    <string name="textAgregadoCita">Se ha añadido a las areas de trabajado del médico.</string>
+    <string name="textAgregadoCupo">Se ha añadido a los cupos del médico</string>
 </resources>

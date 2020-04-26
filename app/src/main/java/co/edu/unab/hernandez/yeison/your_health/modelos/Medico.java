@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Medico extends Usuario implements Serializable {
     private String idUsuario;
     private String aniosExperiencia;
-    private ArrayList<String> areasDeTrabajo;
+    private ArrayList<TipoCita> areasDeTrabajo;
     private ArrayList<CitaMedica> citasRealizadas;
     private ArrayList<FormulaMedica> formulasDadas;
     private String descripcion;
@@ -14,7 +14,7 @@ public class Medico extends Usuario implements Serializable {
     public Medico() {
     }
 
-    public Medico(String idUsuario, String aniosExperiencia, ArrayList<String> areasDeTrabajo, ArrayList<CitaMedica> citasRealizadas, ArrayList<FormulaMedica> formulasDadas, String descripcion) {
+    public Medico(String idUsuario, String aniosExperiencia, ArrayList<TipoCita> areasDeTrabajo, ArrayList<CitaMedica> citasRealizadas, ArrayList<FormulaMedica> formulasDadas, String descripcion) {
         this.idUsuario = idUsuario;
         this.aniosExperiencia = aniosExperiencia;
         this.areasDeTrabajo = areasDeTrabajo;
@@ -39,11 +39,11 @@ public class Medico extends Usuario implements Serializable {
         this.aniosExperiencia = aniosExperiencia;
     }
 
-    public ArrayList<String> getAreasDeTrabajo() {
+    public ArrayList<TipoCita> getAreasDeTrabajo() {
         return areasDeTrabajo;
     }
 
-    public void setAreasDeTrabajo(ArrayList<String> areasDeTrabajo) {
+    public void setAreasDeTrabajo(ArrayList<TipoCita> areasDeTrabajo) {
         this.areasDeTrabajo = areasDeTrabajo;
     }
 

@@ -11,9 +11,11 @@
     tools:context=".fragmentosAdmin.CrearPaciente">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoUnoPaciente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/horarios">
+        android:background="@drawable/horarios"
+        android:visibility="visible">
 
         <ImageButton
             android:id="@+id/btnCamera"
@@ -48,37 +50,19 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/crearPacienteAdm"
-                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="115dp"
-                    android:layout_height="44dp"
+                    android:id="@+id/siguientePasoUnoPaciente"
+                    android:layout_width="118dp"
+                    android:layout_height="45dp"
                     android:background="@drawable/buttonfinalizar"
-                    android:text="@string/textCrear"
+                    android:text="@string/siguiente"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.496"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.97" />
-
-                <EditText
-                    android:id="@+id/numeroDocCrearPaciente"
-                    android:layout_width="314dp"
-                    android:layout_height="44dp"
-                    android:autofillHints=""
-                    android:background="@drawable/editnext"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/textNumeroDoc"
-                    android:inputType="textPersonName"
-                    android:textColor="#000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.481"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.322" />
+                    app:layout_constraintVertical_bias="0.701" />
 
                 <EditText
                     android:id="@+id/nombreDocCrearPaciente"
@@ -90,6 +74,8 @@
                     android:gravity="center"
                     android:hint="@string/nombre"
                     android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.481"
@@ -107,6 +93,8 @@
                     android:gravity="center"
                     android:hint="@string/textEdad"
                     android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.138"
@@ -115,94 +103,55 @@
                     app:layout_constraintVertical_bias="0.546" />
 
                 <EditText
-                    android:id="@+id/telefonoCrearPaciente"
+                    android:id="@+id/numeroDocCrearPaciente"
                     android:layout_width="314dp"
                     android:layout_height="44dp"
                     android:autofillHints=""
                     android:background="@drawable/editnext"
                     android:ems="10"
                     android:gravity="center"
-                    android:hint="@string/textTelefono"
-                    android:inputType="phone"
+                    android:hint="@string/textNumeroDoc"
+                    android:inputType="textPersonName"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.481"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.663" />
-
-                <EditText
-                    android:id="@+id/emailCrearPaciente"
-                    android:layout_width="314dp"
-                    android:layout_height="44dp"
-                    android:autofillHints=""
-                    android:background="@drawable/editnext"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/textemail"
-                    android:inputType="textEmailAddress"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.481"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.767" />
-
-                <EditText
-                    android:id="@+id/contrasenaCrearPacienteAdm"
-                    android:layout_width="314dp"
-                    android:layout_height="44dp"
-                    android:autofillHints=""
-                    android:background="@drawable/editnext"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="@string/textPassword"
-                    android:inputType="textPassword"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.506"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.875" />
-
-                <ImageButton
-                    android:id="@+id/cancelarCrearPaciente"
-                    android:layout_width="63dp"
-                    android:layout_height="59dp"
-                    android:background="@color/colorPrimary"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/cancelar"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.95"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.031" />
-
-                <Spinner
-                    android:id="@+id/tipoDocCrearPaciente"
-                    android:layout_width="312dp"
-                    android:layout_height="44dp"
-                    android:background="@drawable/editnext"
-                    android:gravity="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.493"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.215" />
+                    app:layout_constraintVertical_bias="0.322" />
 
                 <Spinner
                     android:id="@+id/selectorSexoPaciente"
+                    style="@style/Widget.AppCompat.Spinner.DropDown"
                     android:layout_width="100dp"
                     android:layout_height="44dp"
                     android:background="@drawable/editnext"
+                    android:textColor="#FFFFFF"
+                    android:popupBackground="@color/colorAccent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.833"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.546" />
+
+                <Spinner
+                    android:id="@+id/tipoDocCrearPaciente"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="312dp"
+                    android:layout_height="44dp"
+                    android:textColor="#FFFFFF"
+                    android:popupBackground="@color/colorAccent"
+                    android:background="@drawable/editnext"
+                    android:gravity="center"
+                    android:theme="@style/AppTheme"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.493"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.215" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -221,5 +170,126 @@
             app:layout_constraintVertical_bias="0.029" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoDosPaciente"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fonndoinicioadmin"
+        android:visibility="invisible">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView5"
+            android:layout_width="379dp"
+            android:layout_height="400dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.644"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.43">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/crearPacienteAdm"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="115dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/buttonshape"
+                    android:text="@string/textCrear"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.671" />
+
+                <Button
+                    android:id="@+id/atrasUnoPaciente"
+                    android:layout_width="65dp"
+                    android:layout_height="53dp"
+                    android:background="@drawable/retroceder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.083"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.972" />
+
+                <EditText
+                    android:id="@+id/contrasenaCrearPacienteAdm"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textPassword"
+                    android:inputType="textPassword"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.489"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/telefonoCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textTelefono"
+                    android:inputType="phone"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.426"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.083" />
+
+                <EditText
+                    android:id="@+id/emailCrearPaciente"
+                    android:layout_width="314dp"
+                    android:layout_height="44dp"
+                    android:autofillHints=""
+                    android:background="@drawable/editnight"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="@string/textemail"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.428"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.289" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/cancelarCrearPaciente"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:background="@android:color/transparent"
+        android:elevation="2dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/cancelar" />
 
 </FrameLayout>

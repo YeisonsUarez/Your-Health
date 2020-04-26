@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -137,8 +138,8 @@ public class Login extends AppCompatActivity {
         });
     }
     private void anadirDatosSpinner(){
-        final String[] datos =
-                new String[]{getString(R.string.textSpinner),"Cedula de Cuidadania","Tarjeta de Identidad","NIT"};
+        Resources res= getResources();
+        final String[] datos = res.getStringArray(R.array.tiposDocumentos);
 
         ArrayAdapter<String> adaptador =
                 new ArrayAdapter<String>(this,

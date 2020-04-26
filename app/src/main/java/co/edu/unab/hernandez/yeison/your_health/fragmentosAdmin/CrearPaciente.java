@@ -1,7 +1,9 @@
 package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
@@ -10,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -17,6 +20,7 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,19 +35,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.app.Activity.RESULT_OK;
 
 /**
+ * RC = Registro Civil TI = Tarjeta de identidad. CC = Cédula de ciudadanía CE = Cédula de extranjería. PA = Pasaporte MS = Menor sin identificación. AS = Adulto sin identidad.
  * A simple {@link Fragment} subclass.
  */
 public class CrearPaciente extends Fragment {
     private EditText numeroDoc,nombreUser,emailUser,passUser,edadUser, telefonoUser;
     private Spinner generoUser,tipoDocUser;
     private View view;
-    private Button crear;
+    private ConstraintLayout pasoUnoPaciente,pasoDosPaciente;
+    private Button crear,siguiente,atras;
     private ImageButton cancelar, tomarFoto;
     private CircleImageView fotoUser;
     private static final int PICK_IMAGE = 100;
     private static  final int TAKE_PHOTO=200;
     private String name = "";
-
+    Resources res;
+    String[] tiposDocumentos ;
+    String[] tipoSexo;
 
     Uri imageUri;
     public CrearPaciente() {
@@ -57,12 +65,27 @@ public class CrearPaciente extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_crear_paciente, container, false);
         asociarElementos();
+        res =getResources();
+        tiposDocumentos= res.getStringArray(R.array.tiposDocumentos);
+        tipoSexo= res.getStringArray(R.array.tipoSexo);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.tiposDocumentos, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterSexoPersona = ArrayAdapter.createFromResource(getContext(),
+                R.array.tipoSexo, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterSexoPersona.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tipoDocUser.setAdapter(adapter);
+        generoUser.setAdapter(adapterSexoPersona);
         operacionesBotones();
         name= Environment.getExternalStorageDirectory() + "/foto.jpg";
 
         return view;
     }
     public  void asociarElementos(){
+        atras= view.findViewById(R.id.atrasUnoPaciente);
+        pasoUnoPaciente= view.findViewById(R.id.pasoUnoPaciente);
+        pasoDosPaciente= view.findViewById(R.id.pasoDosPaciente);
+        siguiente=view.findViewById(R.id.siguientePasoUnoPaciente);
         numeroDoc= view.findViewById(R.id.numeroDocCrearPaciente);
         nombreUser= view.findViewById(R.id.nombreDocCrearPaciente);
         emailUser= view.findViewById(R.id.emailCrearPaciente);
@@ -95,14 +118,45 @@ public class CrearPaciente extends Fragment {
                 obtenerFoto();
             }
         });
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pasoDosPaciente.setVisibility(View.INVISIBLE);
+                pasoUnoPaciente.setVisibility(View.VISIBLE);
+            }
+        });
+        siguiente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pasoUnoPaciente.setVisibility(View.INVISIBLE);
+                pasoDosPaciente.setVisibility(View.VISIBLE);
+            }
+        });
     }
     public  void  obtenerFoto(){
-        /*Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);*/
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, TAKE_PHOTO);
-        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.mensajeDialogoFoto)
+                .setPositiveButton(R.string.textTomarFoto, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                            startActivityForResult(takePictureIntent, TAKE_PHOTO);
+                        }                    }
+                })
+                .setNegativeButton(R.string.textGaleria, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                        startActivityForResult(gallery, PICK_IMAGE);
+
+                    }
+                });
+        // Create the AlertDialog object and return it
+        builder.create();
+        builder.show();
+
+
 
     }
 
