@@ -93,17 +93,43 @@
         <item>Cedula de Ciudadania</item>
         <item>Cédula de extranjería</item>
         <item>Pasaporte</item>
-        <item>Indentificador laboral</item>
+        <item>Identificacion laboral</item>
     </string-array>
     <string-array name="tipoSexo">
         <item>Selecciona el sexo del usuario</item>
         <item>Masculino</item>
         <item>Femenino</item>
     </string-array>
+    <string name="textCambiarContraseña">Cambiar contraseña</string>
+    <string name="textModificar">Actualizar datos</string>
     <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s ?.</string>
     <string name="confirmarSeleccionCupo"> Información de Cupo:\n Hora:  %1$s \n Lugar: %2$s\n ¿Desea añadirlo al medico %3$s ?</string>
 <string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Al finalizar da click en siguiente.</string>
 <string name="textElegirCupoAdmin">Por favor selecciona los cupos en los que el médico trabajará.\n Al finalizar da click en siguiente.</string>
     <string name="textAgregadoCita">Se ha añadido a las areas de trabajado del médico.</string>
     <string name="textAgregadoCupo">Se ha añadido a los cupos del médico</string>
+
+
+
+    <!-- Strings database -->
+    <string name="nameServer">dinamizate.000webhostapp.com/</string>
+    <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
+    <string name="cargando">...Cargando...</string>
+    <string name="suarioNoEncontrado">No se encontro un usuario con las credeciales digitadas</string>
+    <string name="bienvenido">Bienvenido %1$s</string>
+    <!-- Nombres Atributos usuario -->
+    <string-array name="atributosUsuario">
+        <item>numeroDocumento</item>
+        <item>tipoDocumento</item>
+        <item>nombreUsuario</item>
+        <item>fechaNacimientoUsuario</item>
+        <item>sexoUsuario</item>
+        <item>correoUsuario</item>
+        <item>contrasenaUsuario</item>
+        <item>telefonoUsuario</item>
+        <item>institucionUsuario</item>
+        <item>fotoPerfilUsuario</item>
+        <item>tipoUsuario</item>
+    </string-array>
+
 </resources>

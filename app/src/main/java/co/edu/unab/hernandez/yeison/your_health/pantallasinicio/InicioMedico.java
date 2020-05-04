@@ -37,7 +37,6 @@ public class InicioMedico extends AppCompatActivity {
         setContentView(R.layout.activity_inicio_medico);
         getSupportActionBar().hide();
         medico = (Medico) getIntent().getSerializableExtra(getString(R.string.textMedico));
-        medico= buscarDatosMedico(medico);
         Toast.makeText(this, ""+medico.getNumeroDocumento(), Toast.LENGTH_SHORT).show();
         tabLayout= findViewById(R.id.tabDoctor);
         ViewPager viewPager2= findViewById(R.id.paginasDoctor);
@@ -49,13 +48,7 @@ public class InicioMedico extends AppCompatActivity {
 
     }
 
-    private Medico buscarDatosMedico(Medico medico) {
-        medico.setNombreUsuario("Simon Vargas");
-        medico.setCorreoUsuario("Simon@gmail.com");
-        medico.setFotoPerfil("https://sites.google.com/site/moratbandasimonvargas/_/rsrc/1528023184336/home/simpn.jpg");
-        medico.setTelefono("1121212");
-        return medico;
-    }
+
 
 
     private void loadViewPager(ViewPager viewPager2){

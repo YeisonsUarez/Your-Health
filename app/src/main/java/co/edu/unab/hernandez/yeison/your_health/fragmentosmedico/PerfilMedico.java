@@ -62,10 +62,6 @@ public class PerfilMedico extends Fragment {
         telefonoDOC.setText(medico.getTelefono());
         Glide.with(getActivity()).load(medico.getFotoPerfil()).dontAnimate().placeholder(new ColorDrawable(Color.WHITE)).into(circleImageViewDOC);
 
-        /*if(medico.getFotoPerfil().isEmpty()){
-            medico.setFotoPerfil("https://sites.google.com/site/moratbandasimonvargas/_/rsrc/1528023184336/home/simpn.jpg");
-            Toast.makeText(getActivity(), "Tenemos problemas en profile llega vacio", Toast.LENGTH_SHORT).show();
-        }*/
 
     }
 

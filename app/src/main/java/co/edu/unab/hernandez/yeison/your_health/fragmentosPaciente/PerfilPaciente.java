@@ -61,12 +61,6 @@ public class PerfilPaciente extends Fragment {
         telefono.setText(paciente.getTelefono());
         Glide.with(getActivity()).load(paciente.getFotoPerfil()).dontAnimate().placeholder(new ColorDrawable(Color.WHITE)).into(circleImageView);
 
-        /*if(paciente.getFotoPerfil().isEmpty()){
-            paciente.setFotoPerfil("https://i.pinimg.com/474x/45/f0/85/45f08581d59b28f7020843ad725319b0.jpg");
-            Toast.makeText(getActivity(), "Tenemos problemas en profile llega vacio", Toast.LENGTH_SHORT).show();
-        }*/
-
-
 
 
     }

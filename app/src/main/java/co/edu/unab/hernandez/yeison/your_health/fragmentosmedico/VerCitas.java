@@ -85,7 +85,7 @@ public class VerCitas extends Fragment {
         paciente.setNumeroDocumento("12121");
         paciente.setNombreUsuario("Elliot Alderson");
         paciente.setCorreoUsuario("ygmail.com");
-        paciente.setEdadUsuario("20");
+        paciente.setFechaNacimientoUsuario("20");
         paciente.setSexo("Masculino");
         paciente.setFotoPerfil("https://cadenaser00.epimg.net/ser/imagenes/2015/03/31/television/1427762051_794989_1427763164_noticia_normal.jpg");
         citaMedica.setPaciente(paciente);
@@ -126,7 +126,7 @@ public class VerCitas extends Fragment {
         terminarCita= dialoglayout.findViewById(R.id.btnFinalizarCita);
         nombre.setText(citaMedica.getPaciente().getNombreUsuario());
         correo.setText(citaMedica.getPaciente().getCorreoUsuario());
-        edad.setText(getString(R.string.textEdad)+citaMedica.getPaciente().getEdadUsuario());
+        edad.setText(getString(R.string.textEdad)+citaMedica.getPaciente().getFechaNacimientoUsuario());
         genero.setText(getString(R.string.textSexo)+citaMedica.getPaciente().getSexo());
         tipoynumeroDoc.setText(citaMedica.getPaciente().getTipoDocumento()+citaMedica.getPaciente().getNumeroDocumento());
         fechaHora.setText(citaMedica.getFechaCita()+" "+citaMedica.getCupo().getFecha());

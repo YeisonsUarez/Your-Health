@@ -3,7 +3,7 @@ package co.edu.unab.hernandez.yeison.your_health.modelos;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private String tipoDocumento,edadUsuario,sexo, telefono,tipoUsuario;
+    private String tipoDocumento, fechaNacimientoUsuario,sexo, telefono,tipoUsuario;
     private String numeroDocumento,nombreUsuario,correoUsuario,contrasenauUsuario,fotoPerfil, institucion;
 
     public String getInstitucion() {
@@ -46,12 +46,12 @@ public class Usuario implements Serializable {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public String getEdadUsuario() {
-        return edadUsuario;
+    public String getFechaNacimientoUsuario() {
+        return fechaNacimientoUsuario;
     }
 
-    public void setEdadUsuario(String edadUsuario) {
-        this.edadUsuario = edadUsuario;
+    public void setFechaNacimientoUsuario(String fechaNacimientoUsuario) {
+        this.fechaNacimientoUsuario = fechaNacimientoUsuario;
     }
 
     public String getNumeroDocumento() {

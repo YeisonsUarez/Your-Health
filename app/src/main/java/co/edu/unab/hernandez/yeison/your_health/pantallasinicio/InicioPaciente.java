@@ -33,7 +33,6 @@ public class InicioPaciente extends AppCompatActivity {
         setContentView(R.layout.activity_inicio_paciente);
         getSupportActionBar().hide();
         paciente = (Paciente) getIntent().getSerializableExtra(getString(R.string.textPaciente));
-        paciente= BuscarDatosPaciente(paciente);
         Toast.makeText(this, ""+paciente.getNumeroDocumento(), Toast.LENGTH_SHORT).show();
         tabLayout= findViewById(R.id.tabPaciente);
         ViewPager viewPager2= findViewById(R.id.paginas);
@@ -45,13 +44,6 @@ public class InicioPaciente extends AppCompatActivity {
 
     }
 
-    private Paciente BuscarDatosPaciente(Paciente paciente) {
-        paciente.setFotoPerfil("https://i.pinimg.com/474x/45/f0/85/45f08581d59b28f7020843ad725319b0.jpg");
-        paciente.setTelefono("3115540543");
-        paciente.setCorreoUsuario("Izasa@gmail.com");
-        paciente.setNombreUsuario("Juan Pablo Isaza");
-        return paciente;
-    }
 
 
     private void loadViewPager(ViewPager viewPager2){

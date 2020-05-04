@@ -28,7 +28,6 @@ public class InicioAdministrador extends AppCompatActivity {
         setContentView(R.layout.activity_inicio_administrador);
         getSupportActionBar().hide();
         admin= (Administrador)getIntent().getSerializableExtra(getString(R.string.idAdmin));
-        admin= buscarUsuario(admin);
         tabLayout= findViewById(R.id.tabAdmin);
         ViewPager viewPager2= findViewById(R.id.paginasAdmin);
         loadViewPager(viewPager2);
@@ -36,13 +35,6 @@ public class InicioAdministrador extends AppCompatActivity {
         tabIncons();
     }
 
-    private Administrador buscarUsuario(Administrador admin) {
-        admin.setCorreoUsuario("alguien@gmail.com");
-        admin.setNombreUsuario("alguien");
-        admin.setFotoPerfil("https://m.guiadelocio.com/var/guiadelocio.com/storage/images/cine/personajes/dylan-o-brien/19844251-2-esl-ES/dylan-o-brien.jpg");
-        admin.setInstitucion("alguna intitución");
-        return admin;
-    }
 
     public  void tabIncons(){
         //https://www.flaticon.es/icono-gratis/inscripcion_2621764?term=cita%20medica&page=1&position=10 // horario
@@ -63,7 +55,7 @@ public class InicioAdministrador extends AppCompatActivity {
 
     private Fragment newInstance(Fragment fragment){// metodo para psar los datos del paciente
         Bundle bundle= new Bundle();
-        bundle.putSerializable(getString(R.string.textMedico),admin);
+        bundle.putSerializable(getString(R.string.idAdmin),admin);
         fragment.setArguments(bundle);
         return fragment;
     }
