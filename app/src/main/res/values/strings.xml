@@ -62,7 +62,7 @@
     <string name="terminarcita">Marcar cita como finalizada.</string>
     <string name="citaFinalizada">Cita Finalizada.</string>
     <string name="citaTerminada">Se ha marcado la cita como finalizada.</string>
-    <string name="textEdad">"Edad: "</string>
+    <string name="textEdad">"Fecha de nacimiento: "</string>
     <string name="textSexo">"Sexo: "</string>
     <string name="textCerrar">Cerrar sesión</string>
     <string name="textActualizardatos">Para actualizar tus datos debes contactar con el administrador del centro de salud.</string>
@@ -75,7 +75,7 @@
     <string name="textSwitchAdmin">Por favor seleccione el tipo de usuario que desea visualizar.\n   Paciente: PE\n   Doctor: DR</string>
     <string name="itemUnoTabAdmin">Usuarios</string>
     <string name="itemDosTabAdmin">Gestionar\nCitas</string>
-    <string name="itemTresTabAdmin">Perfil</string>
+    <string name="itemTresTabAdmin">Crear</string>
     <string name="idAdmin">Administrador</string>
     <string name="textMenu">Menu</string>
     <string name="textAnadirPaciente">Crear nuevo Paciente </string>
@@ -86,6 +86,32 @@
     <string name="mensajeDialogoFoto">Elige por cuál media deseas añadir la foto de usuario</string>
     <string name="textTomarFoto">Tomar Foto</string>
     <string name="textGaleria">Seleccionar foto de galeria</string>
+    <string name="textCambiarContraseña">Cambiar contraseña</string>
+    <string name="textModificar">Actualizar datos</string>
+    <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s ?.</string>
+    <string name="confirmarSeleccionCupo"> Información de Cupo:\n Hora:  %1$s \n Lugar: %2$s\n ¿Desea añadirlo al medico %3$s ?</string>
+    <string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Al finalizar da click en siguiente.</string>
+    <string name="textElegirCupoAdmin">Por favor selecciona los cupos en los que el médico trabajará.\n Al finalizar da click en siguiente.</string>
+    <string name="textAgregadoCita">Se ha añadido a las areas de trabajado del médico.</string>
+    <string name="textAgregadoCupo">Se ha añadido a los cupos del médico</string>
+    <string name="crearCupo">Crear cupo</string>
+    <string name="crearTipoCita">Regisrar tipo de Cita</string>
+    <string name="verPerfil">Perfil</string>
+
+
+
+    <!-- Strings database -->
+
+    <string name="nameServerD">192.168.1.13</string>
+    <string name="nameServer">dinamizate.000webhostapp.com</string>
+    <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
+    <string name="urlRegistroUsuario">http://%1$s/YourHealthWebService/registarUsuario.php</string>
+    <string name="urlRegistroTipoCitaYCupo">http://%1$s/YourHealthWebService/registrocupoytipocita.php</string>
+    <string name="cargando">Cargando...</string>
+    <string name="suarioNoEncontrado">No se encontro un usuario con las credeciales digitadas</string>
+    <string name="bienvenido">Bienvenido %1$s</string>
+    <string name="formato_fecha">dd/mm/yyyy</string>
+    <string name="noDisponible">nodisponible</string>
     <string-array name="tiposDocumentos">
         <item>Seleccione un tipo de documento</item>
         <item>Registro Civil</item>
@@ -95,29 +121,12 @@
         <item>Pasaporte</item>
         <item>Identificacion laboral</item>
     </string-array>
+    <!-- Nombres Atributos usuario -->
     <string-array name="tipoSexo">
         <item>Selecciona el sexo del usuario</item>
         <item>Masculino</item>
         <item>Femenino</item>
     </string-array>
-    <string name="textCambiarContraseña">Cambiar contraseña</string>
-    <string name="textModificar">Actualizar datos</string>
-    <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s ?.</string>
-    <string name="confirmarSeleccionCupo"> Información de Cupo:\n Hora:  %1$s \n Lugar: %2$s\n ¿Desea añadirlo al medico %3$s ?</string>
-<string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Al finalizar da click en siguiente.</string>
-<string name="textElegirCupoAdmin">Por favor selecciona los cupos en los que el médico trabajará.\n Al finalizar da click en siguiente.</string>
-    <string name="textAgregadoCita">Se ha añadido a las areas de trabajado del médico.</string>
-    <string name="textAgregadoCupo">Se ha añadido a los cupos del médico</string>
-
-
-
-    <!-- Strings database -->
-    <string name="nameServer">dinamizate.000webhostapp.com/</string>
-    <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
-    <string name="cargando">...Cargando...</string>
-    <string name="suarioNoEncontrado">No se encontro un usuario con las credeciales digitadas</string>
-    <string name="bienvenido">Bienvenido %1$s</string>
-    <!-- Nombres Atributos usuario -->
     <string-array name="atributosUsuario">
         <item>numeroDocumento</item>
         <item>tipoDocumento</item>

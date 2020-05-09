@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class TiposCitasAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView nombre,detalle;
+        public EditText nombre,detalle;
         ImageView foto ;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

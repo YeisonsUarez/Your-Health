@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.UsuariosAdapter;
+import co.edu.unab.hernandez.yeison.your_health.modelos.Administrador;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Paciente;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Usuario;
@@ -35,6 +36,7 @@ public class Usuarios extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Usuario> usuarios;
     private View view;
+    private Administrador admin;
     private Switch tipoUsuarioSwitch;
     private FragmentTransaction transaction;
     Fragment crearPaciente, crearMedico, editarUsuario;
@@ -48,6 +50,7 @@ public class Usuarios extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_usuarios, container, false);
+        admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
        asociarElementos();
        operacionesDeBotones();
 
@@ -119,6 +122,9 @@ public class Usuarios extends Fragment {
             transaction.replace(R.id.frameLayoutUsuarios,crearPaciente).addToBackStack(null).commit();
         }else{
             crearPaciente= new CrearPaciente();
+            Bundle bundle= new Bundle();
+            bundle.putSerializable(getString(R.string.idAdmin),admin);
+            crearPaciente.setArguments(bundle);
             transaction.add(R.id.frameLayoutUsuarios,crearPaciente);
             transaction.addToBackStack(null);
             transaction.commit();
@@ -131,6 +137,9 @@ public class Usuarios extends Fragment {
             transaction.replace(R.id.frameLayoutUsuarios,crearMedico).addToBackStack(null).commit();
         }else{
             crearMedico= new CrearMedico();
+            Bundle bundle= new Bundle();
+            bundle.putSerializable(getString(R.string.idAdmin),admin);
+            crearMedico.setArguments(bundle);
             transaction.add(R.id.frameLayoutUsuarios,crearMedico);
             transaction.addToBackStack(null);
             transaction.commit();

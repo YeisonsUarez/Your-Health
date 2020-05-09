@@ -1,22 +1,20 @@
 package co.edu.unab.hernandez.yeison.your_health.modelos;
 
 public class CitaMedica {
+    private Administrador administrador;
     private Paciente paciente;
     private Medico medico;
     private TipoCita tipoCita;
-    private String idCita, detallesCita, fechaCita,estadoCita;
+    private int idCita;
+    private String  detallesCita, fechaCita,estadoCita;
     private Cupo cupo;
 
+    public Administrador getAdministrador() {
+        return administrador;
+    }
 
-    public CitaMedica(Paciente paciente, Medico medico, TipoCita tipoCita, String idCita, String detallesCita, Cupo cupo, String fechaCita,String estadoCita) {
-        this.paciente = paciente;
-        this.medico = medico;
-        this.tipoCita = tipoCita;
-        this.idCita = idCita;
-        this.detallesCita = detallesCita;
-        this.cupo = cupo;
-        this.fechaCita= fechaCita;
-        this.estadoCita= estadoCita;
+    public void setAdministrador(Administrador administrador) {
+        this.administrador = administrador;
     }
 
     public CitaMedica() {
@@ -62,11 +60,11 @@ public class CitaMedica {
         this.tipoCita = tipoCita;
     }
 
-    public String getIdCita() {
+    public int getIdCita() {
         return idCita;
     }
 
-    public void setIdCita(String idCita) {
+    public void setIdCita(int idCita) {
         this.idCita = idCita;
     }
 

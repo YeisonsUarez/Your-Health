@@ -66,7 +66,9 @@
                         android:id="@+id/atrasPasoCuatro"
                         android:layout_width="65dp"
                         android:layout_height="49dp"
-                        android:background="@drawable/retroceder"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:text="@string/atras"
+                        android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.057"
@@ -91,13 +93,14 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cuposCrearMedico"
-                        android:layout_width="360dp"
-                        android:layout_height="500dp"
+                        android:layout_width="357dp"
+                        android:layout_height="439dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.578"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.573" />
+                        app:layout_constraintVertical_bias="0.441" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -127,10 +130,11 @@
 
                 <Button
                     android:id="@+id/atrasPasoTres"
-                    android:layout_width="66dp"
-                    android:layout_height="43dp"
-                    android:background="@drawable/retroceder"
+                    android:layout_width="132dp"
+                    android:layout_height="51dp"
+                    android:background="@drawable/buttonfinalizar"
                     android:backgroundTint="@color/colorAccent"
+                    android:text="@string/atras"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -223,7 +227,9 @@
                     android:id="@+id/atrasPasoDos"
                     android:layout_width="70dp"
                     android:layout_height="42dp"
-                    android:background="@drawable/retroceder"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/atras"
+                    android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.088"

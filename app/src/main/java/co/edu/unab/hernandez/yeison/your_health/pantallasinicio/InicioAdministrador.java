@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.ViewPagerAdapter;
+import co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin.CrearCitasYCupos;
 import co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin.GestionCitas;
 import co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin.PerfilAdmin;
 import co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin.Usuarios;
@@ -17,7 +18,7 @@ import co.edu.unab.hernandez.yeison.your_health.modelos.Administrador;
 
 public class InicioAdministrador extends AppCompatActivity {
     private TabLayout tabLayout;
-    private int[] tabIncons={R.drawable.verusuarios,R.drawable.gestionarcitas,R.drawable.usuario};
+    private int[] tabIncons={R.drawable.verusuarios,R.drawable.gestionarcitas,R.drawable.creartodo};
     private int[] tabText={R.string.itemUnoTabAdmin,R.string.itemDosTabAdmin,R.string.itemTresTabAdmin};
     private Administrador admin;
 
@@ -48,7 +49,7 @@ public class InicioAdministrador extends AppCompatActivity {
         ViewPagerAdapter adapter= new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(newInstance(new Usuarios()));
         adapter.addFragment(newInstance(new GestionCitas()));
-        adapter.addFragment(newInstance(new PerfilAdmin()));
+        adapter.addFragment(newInstance(new CrearCitasYCupos()));
         viewPager2.setAdapter(adapter);
 
     }

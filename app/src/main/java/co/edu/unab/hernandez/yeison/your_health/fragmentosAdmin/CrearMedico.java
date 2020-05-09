@@ -105,6 +105,7 @@ public class CrearMedico extends Fragment {
             @Override
             public void onClick(View view) {
                 nuevoMedico();
+                getActivity().onBackPressed();
             }
         });
         return view;
@@ -245,7 +246,7 @@ public class CrearMedico extends Fragment {
     private void agregarCupos() {
         cupos= new ArrayList<>();
         for(int i =0; i<10;i++){
-            Cupo cupo= new Cupo("1234"+i,"sala 3-2","2:00pm",true);
+            Cupo cupo= new Cupo("1234"+i,"sala 3-2","2:00pm",getString(R.string.noDisponible));
             cupos.add(cupo);
         }
 
@@ -268,8 +269,8 @@ public class CrearMedico extends Fragment {
 
     private void  addTipoCitas(){
         listaTiposCitasArray= new ArrayList<>();
-        listaTiposCitasArray.add(new TipoCita("1234","Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
-        listaTiposCitasArray.add(new TipoCita("12345","Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
+        listaTiposCitasArray.add(new TipoCita(1234,"Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
+        listaTiposCitasArray.add(new TipoCita(12345,"Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
 
     }
     public boolean confirmarSeleccionCita(TipoCita cita){

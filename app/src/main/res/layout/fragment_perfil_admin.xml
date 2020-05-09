@@ -51,29 +51,13 @@
                     android:layout_width="120dp"
                     android:layout_height="45dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/editback"
+                    android:background="@drawable/editnight"
                     android:text="@string/textModificar"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.203"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.778" />
-
-                <Button
-                    android:id="@+id/actulizarContrasena"
-                    android:layout_width="120dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/editback"
-                    android:text="@string/textCambiarContraseña"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.803"
+                    app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.777" />
@@ -166,6 +150,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.049" />
+
+        <ImageButton
+            android:id="@+id/cerrarPerfilAdmin"
+            android:layout_width="73dp"
+            android:layout_height="69dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.024" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

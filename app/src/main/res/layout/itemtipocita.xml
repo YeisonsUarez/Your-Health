@@ -1,65 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:elevation="6dp"
-    app:cardBackgroundColor="@color/design_default_color_background"
-    app:cardCornerRadius="18dp"
-    app:cardElevation="6dp"
-    app:cardMaxElevation="6dp"
-    app:cardUseCompatPadding="true">
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="0dp"
+        android:layout_height="479dp"
+        android:clipToPadding="true"
+        android:theme="@android:style/Theme.Dialog"
+        app:cardBackgroundColor="@color/colorAccent"
+        app:cardCornerRadius="18dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/fototipo"
-            android:layout_width="0dp"
-            android:layout_height="205dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/nombreTipo"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:background="@drawable/editback"
-            android:gravity="center"
-            android:text="@string/nombre"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.541" />
+            <Button
+                android:id="@+id/crearTipoCita"
+                android:layout_width="94dp"
+                android:layout_height="46dp"
+                android:background="@drawable/buttonshape"
+                android:focusable="false"
+                android:shadowColor="#00FFFFFF"
+                android:text="@string/textCrear"
+                android:textColor="#FFFFFF"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/nombreTipo"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.981" />
 
-        <TextView
-            android:id="@+id/detalleTipoCita"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:background="@drawable/editback"
-            android:gravity="center"
-            android:inputType="textMultiLine"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false"
-            android:text="@string/detalle"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.874" />
+            <EditText
+                android:id="@+id/nombreTipo"
+                android:layout_width="358dp"
+                android:layout_height="54dp"
+                android:background="@drawable/buttonshape"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="@string/nombre"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.407"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.563" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <EditText
+                android:id="@+id/detalleTipoCita"
+                android:layout_width="358dp"
+                android:layout_height="97dp"
+                android:background="@drawable/editnight"
+                android:enabled="false"
+                android:gravity="center"
+                android:hint="@string/detalle"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:imeOptions="actionSend"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.428"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.814" />
+
+            <ImageButton
+                android:id="@+id/tomarFotoTipo"
+                android:layout_width="81dp"
+                android:layout_height="69dp"
+                android:background="@android:color/transparent"
+                android:focusable="false"
+                android:scaleType="centerInside"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.052"
+                app:srcCompat="@drawable/camera" />
+
+            <ImageView
+                android:id="@+id/fototipo"
+                android:layout_width="0dp"
+                android:layout_height="205dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.07"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="225dp"
+                android:layout_height="210dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.929"
+                app:srcCompat="@drawable/doctortipocita" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="213dp"
+                android:layout_height="155dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.755"
+                app:srcCompat="@drawable/doctora" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

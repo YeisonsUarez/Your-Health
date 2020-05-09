@@ -1,11 +1,14 @@
 package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,19 +20,39 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
+import co.edu.unab.hernandez.yeison.your_health.modelos.Administrador;
+import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
@@ -39,19 +62,38 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class CrearPaciente extends Fragment {
-    private EditText numeroDoc,nombreUser,emailUser,passUser,edadUser, telefonoUser;
+    private EditText numeroDoc,nombreUser,emailUser,passUser, telefonoUser;
     private Spinner generoUser,tipoDocUser;
+    private TextView edadUser;
     private View view;
     private ConstraintLayout pasoUnoPaciente,pasoDosPaciente;
     private Button crear,siguiente,atras;
     private ImageButton cancelar, tomarFoto;
+    private Administrador admin;
     private CircleImageView fotoUser;
     private static final int PICK_IMAGE = 100;
     private static  final int TAKE_PHOTO=200;
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
     private String name = "";
     Resources res;
     String[] tiposDocumentos ;
     String[] tipoSexo;
+
+    //Calendario para obtener fecha & hora
+    public final Calendar c = Calendar.getInstance();
+
+    //Variables para obtener la fecha
+    final int mes = c.get(Calendar.MONTH);
+    final int dia = c.get(Calendar.DAY_OF_MONTH);
+    final int anio = c.get(Calendar.YEAR);
+
+    Bitmap bitmap;
+    ProgressDialog progreso;
+    // RequestQueue request;
+    JsonObjectRequest jsonObjectRequest;
+
+    StringRequest stringRequest;
 
     Uri imageUri;
     public CrearPaciente() {
@@ -65,6 +107,7 @@ public class CrearPaciente extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_crear_paciente, container, false);
         asociarElementos();
+        admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
         res =getResources();
         tiposDocumentos= res.getStringArray(R.array.tiposDocumentos);
         tipoSexo= res.getStringArray(R.array.tipoSexo);
@@ -100,10 +143,16 @@ public class CrearPaciente extends Fragment {
         crear=view.findViewById(R.id.crearPacienteAdm);
     }
     public  void  operacionesBotones(){
+        edadUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                obtenerFecha();
+            }
+        });
         crear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Nice", Toast.LENGTH_SHORT).show();
+                guardarDatos();
             }
         });
         cancelar.setOnClickListener(new View.OnClickListener() {
@@ -160,19 +209,136 @@ public class CrearPaciente extends Fragment {
 
     }
 
+    public void guardarDatos(){
+        progreso=new ProgressDialog(getContext());
+        progreso.setMessage("Cargando...");
+        progreso.show();
+
+
+        String url= getString(R.string.urlRegistroUsuario,getString(R.string.nameServer));
+
+        stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                progreso.dismiss();
+
+                if (response.trim().equalsIgnoreCase("registra")){
+                    numeroDoc.setText("");
+                    nombreUser.setText("");
+                    emailUser.setText("");
+                    passUser.setText("");
+                    edadUser.setText("");
+                    telefonoUser.setText("");
+                    Toast.makeText(getContext(),"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(),"No se ha registrado "+response,Toast.LENGTH_LONG).show();
+                    Log.i("RESPUESTA: ",""+response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progreso.dismiss();
+
+                Log.i("ERRORVOLLEY: ",""+error.getMessage());
+                Toast.makeText(getContext(),"No se ha podido conectar"+error.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                String imagen=convertirImgString(bitmap);
+                String numero =numeroDoc.getText().toString();
+                String tipoDoc=tipoDocUser.getSelectedItem().toString();
+                String nombre=nombreUser.getText().toString();
+                String edad=edadUser.getText().toString();
+                String genero=generoUser.getSelectedItem().toString();
+                String email= emailUser.getText().toString();
+                String contrasena=passUser.getText().toString();
+                String telefono=telefonoUser.getText().toString();
+                String intitucion= admin.getInstitucion();
+                String tipoUSer= getString(R.string.textPaciente);
+                Map<String,String> parametros=new HashMap<>();
+                parametros.put("numeroDocumento",numero);
+                parametros.put("tipoDocumento",tipoDoc);
+                parametros.put("nombreUsuario",nombre);
+                parametros.put("fechaNacimientoUsuario",edad);
+                parametros.put("sexoUsuario",genero);
+                parametros.put("correoUsuario",email);
+                parametros.put("contrasenaUsuario",contrasena);
+                parametros.put("telefonoUsuario", telefono);
+                parametros.put("institucionUsuario",intitucion);
+                parametros.put("tipoUsuario",tipoUSer);
+                parametros.put("fotoPerfilUsuario",imagen);
+
+                return parametros;
+            }
+
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);
+
+        getActivity().onBackPressed();
+
+    }
+    private String convertirImgString(Bitmap bitmap) {
+
+        ByteArrayOutputStream array=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,array);
+        byte[] imagenByte=array.toByteArray();
+        String imagenString= Base64.encodeToString(imagenByte, Base64.DEFAULT);
+
+        return imagenString;
+    }
+
+
+
+    private void obtenerFecha(){
+        DatePickerDialog recogerFecha = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
+                final int mesActual = month + 1;
+                //Formateo el día obtenido: antepone el 0 si son menores de 10
+                String diaFormateado = (dayOfMonth < 10)? CERO + String.valueOf(dayOfMonth):String.valueOf(dayOfMonth);
+                //Formateo el mes obtenido: antepone el 0 si son menores de 10
+                String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
+                //Muestro la fecha con el formato deseado
+                edadUser.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
+
+
+            }
+            //Estos valores deben ir en ese orden, de lo contrario no mostrara la fecha actual
+            /**
+             *También puede cargar los valores que usted desee
+             */
+        },anio, mes, dia);
+        //Muestro el widget
+        recogerFecha.show();
+
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
             imageUri = data.getData();
             fotoUser.setImageURI(imageUri);
+            try {
+                bitmap=MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),imageUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else {
             if (resultCode == RESULT_OK && requestCode == TAKE_PHOTO) {
                 Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-                fotoUser.setImageBitmap(imageBitmap);
+                bitmap = (Bitmap) extras.get("data");
+                fotoUser.setImageBitmap(bitmap);
             }
         }
 
     }
+
+
 }

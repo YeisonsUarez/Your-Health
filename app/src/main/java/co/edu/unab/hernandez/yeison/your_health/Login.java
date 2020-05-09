@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -73,9 +74,9 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
         getSupportActionBar().hide();
         LocalStorage= getSharedPreferences(getString(R.string.nameStorage),MODE_PRIVATE);
         Boolean status= LocalStorage.getBoolean(getString(R.string.strStatus),false);
-        String user= LocalStorage.getString(getString(R.string.idUser),getString(R.string.nombre));
+        String user= LocalStorage.getString(getString(R.string.idUser),"");
         String tipoDoc=LocalStorage.getString(getString(R.string.idTipoDoc),"");
-        //String rol= LocalStorage.getString(getString(R.string.textRol),"");
+        String contrasena= LocalStorage.getString(getString(R.string.textPassword),"");
         usuario= new Usuario();
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
 
@@ -87,30 +88,16 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
 
 
 
-        /*if(status){
-            if(rol.equalsIgnoreCase(getString(R.string.textMedico))){
-                Medico medico= new Medico();
-                medico.setNumeroDocumento(user);
-                medico.setTipoDocumento(tipoDoc);
-                Intent intent= new Intent(Login.this, InicioMedico.class);
-                intent.putExtra(getString(R.string.textMedico),medico);
-                startActivity(intent);
-                finish();
-            }else{
-                if(rol.equalsIgnoreCase(getString(R.string.textPaciente))){
-                    Paciente paciente= new Paciente();
-                    paciente.setNumeroDocumento(user);
-                    paciente.setTipoDocumento(tipoDoc);
-                    Intent intent= new Intent(Login.this, InicioPaciente.class);
-                    intent.putExtra(getString(R.string.textPaciente),paciente);
-                    startActivity(intent);
-                    finish();
-                }else {
-                    Toast.makeText(Login.this, getString(R.string.errorDatosVacios), Toast.LENGTH_SHORT).show();
-                }
-            }
+        if(status){
+            progreso=new ProgressDialog(Login.this);
+            progreso.setMessage(getString(R.string.cargando));
+            progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progreso.setCancelable(true);
+            progreso.show();
+            iniciarValidacion(tipoDoc,user,contrasena);
+        }
 
-        }*/
+
         asignarElementos();
         anadirDatosSpinner();
 
@@ -130,12 +117,17 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progreso=new ProgressDialog(Login.this);
+                progreso.setMessage(getString(R.string.cargando));
+                progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progreso.setCancelable(true);
+                progreso.show();
 
                 if(spinnerTipoDoc.getSelectedItemId()!=0 && !cedula.getText().toString().isEmpty() && !contrasena.getText().toString().isEmpty()){
-                    iniciarValidacion();
+                    iniciarValidacion(spinnerTipoDoc.getSelectedItem().toString(),cedula.getText().toString(),contrasena.getText().toString());
 
                 }else{
-                    progreso.hide();
+                    progreso.dismiss();
                     Toast.makeText(Login.this, getString(R.string.tectErrorCredenciales), Toast.LENGTH_SHORT).show();
                 }
 
@@ -151,87 +143,18 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
                         android.R.layout.simple_spinner_item, datos);
         spinnerTipoDoc.setAdapter(adaptador);
     }
-    private void iniciarValidacion(){
-        progreso=new ProgressDialog(Login.this);
-        progreso.setMessage(getString(R.string.cargando));
-        progreso.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progreso.setCancelable(true);
-        progreso.show();
-        requestQueue.start();
-        String urlLogin=getString(R.string.urlLogin, getString(R.string.nameServer),spinnerTipoDoc.getSelectedItem().toString(),cedula.getText().toString(),contrasena.getText().toString());
-       // urlLogin= urlLogin.replace(" ","%20"); //cambia los espacios en blanco por porcentaje 20 para que el servidor los lea
+    private void iniciarValidacion(String tipoDocumento, String numeroDocumento,String contrasena){
+
+        String urlLogin=getString(R.string.urlLogin, getString(R.string.nameServer),tipoDocumento,numeroDocumento,contrasena);
+        urlLogin= urlLogin.replace(" ","%20"); //cambia los espacios en blanco por porcentaje 20 para que el servidor los lea
         jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, urlLogin, null,this,this);
-        requestQueue.add(jsonObjectRequest);
-        Toast.makeText(Login.this, getString(R.string.bienvenido, usuario.getNombreUsuario()+usuario.getTipoUsuario()), Toast.LENGTH_SHORT).show();
-        if(usuario.getTipoUsuario()!=null){
-
-            switch (usuario.getTipoUsuario()){
-                case "Paciente":
-
-                    Paciente paciente= new Paciente();
-                    paciente.setTipoDocumento(usuario.getTipoDocumento());
-                    paciente.setNumeroDocumento(usuario.getNumeroDocumento());
-                    paciente.setNombreUsuario(usuario.getNombreUsuario());
-                    paciente.setInstitucion(usuario.getInstitucion());
-                    paciente.setFotoPerfil(usuario.getFotoPerfil());
-                    paciente.setCorreoUsuario(usuario.getCorreoUsuario());
-                    paciente.setContrasenauUsuario(usuario.getContrasenauUsuario());
-                    paciente.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
-                    paciente.setSexo(usuario.getSexo());
-                    paciente.setTelefono(usuario.getTelefono());
-                    paciente.setTipoUsuario(usuario.getTipoUsuario());
-                    Intent intent= new Intent(Login.this, InicioPaciente.class);
-                    intent.putExtra(getString(R.string.textPaciente),paciente);
-                    startActivity(intent);
-                    finish();
-                    onDestroy();
-                    break;
-                case "Medico":
-                    Medico medico= new Medico();
-                    medico.setTipoDocumento(usuario.getTipoDocumento());
-                    medico.setNumeroDocumento(usuario.getNumeroDocumento());
-                    medico.setNombreUsuario(usuario.getNombreUsuario());
-                    medico.setInstitucion(usuario.getInstitucion());
-                    medico.setFotoPerfil(usuario.getFotoPerfil());
-                    medico.setCorreoUsuario(usuario.getCorreoUsuario());
-                    medico.setContrasenauUsuario(usuario.getContrasenauUsuario());
-                    medico.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
-                    medico.setSexo(usuario.getSexo());
-                    medico.setTelefono(usuario.getTelefono());
-                    medico.setTipoUsuario(usuario.getTipoUsuario());
-                    Intent intentM= new Intent(Login.this, InicioMedico.class);
-                    intentM.putExtra(getString(R.string.textMedico),medico);
-                    startActivity(intentM);
-                    finish();
-                    break;
-                case "Administrador":
-                    Administrador administrador=  new Administrador();
-                    administrador.setTipoDocumento(usuario.getTipoDocumento());
-                    administrador.setNumeroDocumento(usuario.getNumeroDocumento());
-                    administrador.setNombreUsuario(usuario.getNombreUsuario());
-                    administrador.setInstitucion(usuario.getInstitucion());
-                    administrador.setFotoPerfil(usuario.getFotoPerfil());
-                    administrador.setCorreoUsuario(usuario.getCorreoUsuario());
-                    administrador.setContrasenauUsuario(usuario.getContrasenauUsuario());
-                    administrador.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
-                    administrador.setSexo(usuario.getSexo());
-                    administrador.setTelefono(usuario.getTelefono());
-                    administrador.setTipoUsuario(usuario.getTipoUsuario());
-                    Intent intentA= new Intent(Login.this, InicioAdministrador.class);
-                    intentA.putExtra(getString(R.string.idAdmin),administrador);
-                    startActivity(intentA);
-                    finish();
-                    break;
-            }
-
-
-        }
+        VolleySingleton.getIntanciaVolley(Login.this).addToRequestQueue(jsonObjectRequest);
 
     }
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        progreso.hide();
+        progreso.dismiss();
         Toast.makeText(Login.this, getString(R.string.tectErrorCredenciales), Toast.LENGTH_LONG).show();
         cedula.setText("");
         contrasena.setText("");
@@ -239,7 +162,7 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
 
     @Override
     public void onResponse(JSONObject response) {
-        progreso.hide();
+        progreso.dismiss();
         jsonArray= response.optJSONArray("usuario");
         Resources res= getResources();
         final String[] atributosUsuario = res.getStringArray(R.array.atributosUsuario);
@@ -258,7 +181,79 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
             usuario.setInstitucion(jsonObject.optString(atributosUsuario[8]));
             usuario.setFotoPerfil(jsonObject.optString(atributosUsuario[9]));
             usuario.setTipoUsuario(jsonObject.optString(atributosUsuario[10]));
+            SharedPreferences.Editor edit= LocalStorage.edit();
+            edit.putBoolean(getString(R.string.strStatus),true);
+            edit.putString(getString(R.string.idUser),usuario.getNumeroDocumento());
+            edit.putString(getString(R.string.idTipoDoc),usuario.getTipoDocumento());
+            edit.putString(getString(R.string.textPassword),usuario.getContrasenauUsuario());
+            edit.apply();
+            Toast.makeText(Login.this, getString(R.string.bienvenido, usuario.getNombreUsuario()+usuario.getTipoUsuario()), Toast.LENGTH_SHORT).show();
+            if(usuario.getTipoUsuario()!=null){
+
+                switch (usuario.getTipoUsuario()){
+                    case "Paciente":
+
+                        Paciente paciente= new Paciente();
+                        paciente.setTipoDocumento(usuario.getTipoDocumento());
+                        paciente.setNumeroDocumento(usuario.getNumeroDocumento());
+                        paciente.setNombreUsuario(usuario.getNombreUsuario());
+                        paciente.setInstitucion(usuario.getInstitucion());
+                        paciente.setFotoPerfil(usuario.getFotoPerfil());
+                        paciente.setCorreoUsuario(usuario.getCorreoUsuario());
+                        paciente.setContrasenauUsuario(usuario.getContrasenauUsuario());
+                        paciente.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
+                        paciente.setSexo(usuario.getSexo());
+                        paciente.setTelefono(usuario.getTelefono());
+                        paciente.setTipoUsuario(usuario.getTipoUsuario());
+                        Intent intent= new Intent(Login.this, InicioPaciente.class);
+                        intent.putExtra(getString(R.string.textPaciente),paciente);
+                        startActivity(intent);
+                        finish();
+
+                        break;
+                    case "Medico":
+                        Medico medico= new Medico();
+                        medico.setTipoDocumento(usuario.getTipoDocumento());
+                        medico.setNumeroDocumento(usuario.getNumeroDocumento());
+                        medico.setNombreUsuario(usuario.getNombreUsuario());
+                        medico.setInstitucion(usuario.getInstitucion());
+                        medico.setFotoPerfil(usuario.getFotoPerfil());
+                        medico.setCorreoUsuario(usuario.getCorreoUsuario());
+                        medico.setContrasenauUsuario(usuario.getContrasenauUsuario());
+                        medico.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
+                        medico.setSexo(usuario.getSexo());
+                        medico.setTelefono(usuario.getTelefono());
+                        medico.setTipoUsuario(usuario.getTipoUsuario());
+                        Intent intentM= new Intent(Login.this, InicioMedico.class);
+                        intentM.putExtra(getString(R.string.textMedico),medico);
+                        startActivity(intentM);
+                        finish();
+                        break;
+                    case "Administrador":
+                        Administrador administrador=  new Administrador();
+                        administrador.setTipoDocumento(usuario.getTipoDocumento());
+                        administrador.setNumeroDocumento(usuario.getNumeroDocumento());
+                        administrador.setNombreUsuario(usuario.getNombreUsuario());
+                        administrador.setInstitucion(usuario.getInstitucion());
+                        administrador.setFotoPerfil(usuario.getFotoPerfil());
+                        administrador.setCorreoUsuario(usuario.getCorreoUsuario());
+                        administrador.setContrasenauUsuario(usuario.getContrasenauUsuario());
+                        administrador.setFechaNacimientoUsuario(usuario.getFechaNacimientoUsuario());
+                        administrador.setSexo(usuario.getSexo());
+                        administrador.setTelefono(usuario.getTelefono());
+                        administrador.setTipoUsuario(usuario.getTipoUsuario());
+                        Intent intentA= new Intent(Login.this, InicioAdministrador.class);
+                        intentA.putExtra(getString(R.string.idAdmin),administrador);
+                        startActivity(intentA);
+                        finish();
+                        break;
+                }
+
+
+            }
+
         } catch (JSONException e) {
+            progreso.dismiss();
             Toast.makeText(Login.this, getString(R.string.tectErrorCredenciales), Toast.LENGTH_LONG).show();
             cedula.setText("");
             contrasena.setText("");
@@ -266,4 +261,5 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
 
 
     }
+
 }

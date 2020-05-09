@@ -4,8 +4,8 @@ public class Cupo {
     private String idCupo;
     private String lugar;
     private String fecha;
-    private Boolean disponible;
-    public Cupo(String idCupo, String lugar, String fecha, Boolean disponible) {
+    private String disponible;
+    public Cupo(String idCupo, String lugar, String fecha, String disponible) {
         this.idCupo = idCupo;
         this.lugar = lugar;
         this.fecha = fecha;
@@ -15,11 +15,11 @@ public class Cupo {
     public Cupo() {
     }
 
-    public Boolean getDisponible() {
+    public String getDisponible() {
         return disponible;
     }
 
-    public void setDisponible(Boolean disponible) {
+    public void setDisponible(String disponible) {
         this.disponible = disponible;
     }
 

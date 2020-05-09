@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class CuposAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView hora,lugar;
+        public EditText hora,lugar;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             hora= itemView.findViewById(R.id.textHora);

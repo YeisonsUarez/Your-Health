@@ -25,12 +25,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 public class PerfilAdmin extends Fragment {
 
-    Administrador admin;
+    private Administrador admin;
     View view;
     EditText nombreAdmin,correoAdmin,telefonoAdmin;
     TextView tipoYNumeroDocumento;
-    Button cerrarSesion, actualizarDatos, cambiarContrasena;
-    ImageButton cambiarfotoAdmin;
+    Button cerrarSesion, actualizarDatos;
+    ImageButton cambiarfotoAdmin,cerrar;
     CircleImageView fotoAdmin;
 
     public PerfilAdmin() {
@@ -57,7 +57,7 @@ public class PerfilAdmin extends Fragment {
         tipoYNumeroDocumento= view.findViewById(R.id.docyNumeroDocAdmin);
         cerrarSesion= view.findViewById(R.id.cerrarsesionAdmin);
         actualizarDatos= view.findViewById(R.id.actulizarAdmin);
-        cambiarContrasena= view.findViewById(R.id.actulizarContrasena);
+        cerrar= view.findViewById(R.id.cerrarPerfilAdmin);
         cambiarfotoAdmin= view.findViewById(R.id.cambiarFotoAdmin);
         fotoAdmin=view.findViewById(R.id.fotoAdminPerfil);
     }
@@ -69,5 +69,19 @@ public class PerfilAdmin extends Fragment {
         tipoYNumeroDocumento.setText(admin.getTipoDocumento()+" :"+admin.getNumeroDocumento());
         Glide.with(getActivity()).load(admin.getFotoPerfil()).dontAnimate().placeholder(new ColorDrawable(Color.WHITE)).into(fotoAdmin);
 
+    }
+    public void operacionesBotones(){
+        actualizarDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        cerrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
     }
 }

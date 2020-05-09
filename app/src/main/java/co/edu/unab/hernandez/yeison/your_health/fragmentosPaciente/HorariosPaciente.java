@@ -116,7 +116,7 @@ public class HorariosPaciente extends Fragment {
     private void agregarCupos() {
         cupos= new ArrayList<>();
         for(int i =0; i<10;i++){
-            Cupo cupo= new Cupo("1234"+i,"sala 3-2","2:00pm",true);
+            Cupo cupo= new Cupo("1234"+i,"sala 3-2","2:00pm",getString(R.string.noDisponible));
             cupos.add(cupo);
         }
 
@@ -140,8 +140,8 @@ public class HorariosPaciente extends Fragment {
 
     private void  addTipoCitas(){
         listaTiposCitas= new ArrayList<>();
-        listaTiposCitas.add(new TipoCita("1234","Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
-        listaTiposCitas.add(new TipoCita("12345","Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
+        listaTiposCitas.add(new TipoCita(1234,"Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
+        listaTiposCitas.add(new TipoCita(12345,"Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
 
     }
     public void inicarRecyclerMedicos(){
@@ -162,7 +162,6 @@ public class HorariosPaciente extends Fragment {
         medicos= new ArrayList<>();
         for(int i=0;i<=4;i++){
             Medico medico= new Medico();
-            medico.setIdUsuario("124");
             medico.setNombreUsuario("Mr.robot");
             medico.setDescripcion("Confiable y seguro");
             medico.setFotoPerfil("https://pm1.narvii.com/6236/d49bb1b56cb7caff2d71aa2c0182ef6b1e079261_00.jpg");
@@ -209,7 +208,7 @@ public class HorariosPaciente extends Fragment {
                     switchTipoCita.setVisibility(View.INVISIBLE);
                     pasoUno.setVisibility(View.INVISIBLE);
                     pasoDos.setVisibility(View.VISIBLE);
-                    TipoCita tipoCitaMedica = new TipoCita(getString(R.string.tipoGeneral),getString(R.string.nombreGeneral),getString(R.string.detalleGeneral),getString(R.string.UrlCitaGeneral));
+                    TipoCita tipoCitaMedica = new TipoCita(22,getString(R.string.nombreGeneral),getString(R.string.detalleGeneral),getString(R.string.UrlCitaGeneral));
                     citaMedica.setTipoCita(tipoCitaMedica);
                 }else{
                     switchTipoCita.setVisibility(View.INVISIBLE);
