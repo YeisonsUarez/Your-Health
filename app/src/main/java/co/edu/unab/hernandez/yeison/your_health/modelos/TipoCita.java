@@ -1,7 +1,7 @@
 package co.edu.unab.hernandez.yeison.your_health.modelos;
 
 public class TipoCita {
-    private int idTipo;
+    private String idTipo;
     private String nombreTipoCita;
     private String detalleTipoCita;
     private String urlImagen;
@@ -9,7 +9,7 @@ public class TipoCita {
     public TipoCita() {
     }
 
-    public TipoCita(int idTipo, String nombreTipoCita, String detalleTipoCita, String urlImagen) {
+    public TipoCita(String idTipo, String nombreTipoCita, String detalleTipoCita, String urlImagen) {
         this.idTipo = idTipo;
         this.nombreTipoCita = nombreTipoCita;
         this.detalleTipoCita = detalleTipoCita;
@@ -24,11 +24,11 @@ public class TipoCita {
         this.urlImagen = urlImagen;
     }
 
-    public int getIdTipo() {
+    public String getIdTipo() {
         return idTipo;
     }
 
-    public void setIdTipo(int idTipo) {
+    public void setIdTipo(String idTipo) {
         this.idTipo = idTipo;
     }
 

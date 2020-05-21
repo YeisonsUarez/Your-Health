@@ -140,8 +140,8 @@ public class HorariosPaciente extends Fragment {
 
     private void  addTipoCitas(){
         listaTiposCitas= new ArrayList<>();
-        listaTiposCitas.add(new TipoCita(1234,"Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
-        listaTiposCitas.add(new TipoCita(12345,"Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
+        listaTiposCitas.add(new TipoCita("1234","Odontologia","Cita para revisión de dientes",getString(R.string.fotoOdontologia)));
+        listaTiposCitas.add(new TipoCita("12345","Fisioterapia","Cita para reparación y restauración de la movilidad física",getString(R.string.fotoFisioterapia)));
 
     }
     public void inicarRecyclerMedicos(){
@@ -208,7 +208,7 @@ public class HorariosPaciente extends Fragment {
                     switchTipoCita.setVisibility(View.INVISIBLE);
                     pasoUno.setVisibility(View.INVISIBLE);
                     pasoDos.setVisibility(View.VISIBLE);
-                    TipoCita tipoCitaMedica = new TipoCita(22,getString(R.string.nombreGeneral),getString(R.string.detalleGeneral),getString(R.string.UrlCitaGeneral));
+                    TipoCita tipoCitaMedica = new TipoCita("22",getString(R.string.nombreGeneral),getString(R.string.detalleGeneral),getString(R.string.UrlCitaGeneral));
                     citaMedica.setTipoCita(tipoCitaMedica);
                 }else{
                     switchTipoCita.setVisibility(View.INVISIBLE);

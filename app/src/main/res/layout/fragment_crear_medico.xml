@@ -11,32 +11,17 @@
         tools:context=".fragmentosAdmin.CrearMedico">
 
 
-        <ImageButton
-            android:id="@+id/cancelarCrearMedico"
-            android:layout_width="63dp"
-            android:layout_height="59dp"
-            android:background="@android:color/transparent"
-            android:scaleType="centerInside"
-            android:src="@drawable/cancelar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.031"
-            android:elevation="3dp" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/pasoCuatroMedico"
+            android:id="@+id/pasoTresMedico"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/fondovercitas"
+            android:background="@drawable/fotoperfildoctor"
             android:visibility="invisible">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:cardBackgroundColor="@color/colorAccent"
+                app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="20dp"
                 app:cardUseCompatPadding="true"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,40 +34,28 @@
                     android:layout_height="match_parent">
 
                     <Button
-                        android:id="@+id/crearMedico"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
-                        android:text="@string/textCrear"
-                        android:textColor="#FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.938"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.947" />
-
-                    <Button
-                        android:id="@+id/atrasPasoCuatro"
-                        android:layout_width="65dp"
-                        android:layout_height="49dp"
-                        android:backgroundTint="@color/colorPrimary"
+                        android:id="@+id/atrasPasoTres"
+                        android:layout_width="132dp"
+                        android:layout_height="51dp"
+                        android:background="@drawable/buttonfinalizar"
+                        android:backgroundTint="@color/colorAccent"
                         android:text="@string/atras"
                         android:textColor="#FFFFFF"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.057"
+                        app:layout_constraintHorizontal_bias="0.072"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.938" />
+                        app:layout_constraintVertical_bias="0.91" />
 
                     <TextView
-                        android:id="@+id/textView152"
+                        android:id="@+id/textView14"
                         android:layout_width="295dp"
                         android:layout_height="68dp"
-                        android:background="@drawable/editnight"
+                        android:background="@drawable/editnext"
                         android:gravity="center"
-                        android:text="@string/textElegirCupoAdmin"
+                        android:text="@string/textElegirTipoCitaDoctorAdmin"
                         android:textColor="#FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -92,99 +65,16 @@
                         app:layout_constraintVertical_bias="0.049" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/cuposCrearMedico"
-                        android:layout_width="357dp"
-                        android:layout_height="439dp"
+                        android:id="@+id/listaAreasAtencion"
+                        android:layout_width="349dp"
+                        android:layout_height="476dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.578"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.441" />
-
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/pasoTresMedico"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/fotoperfildoctor"
-        android:visibility="invisible">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:cardBackgroundColor="@color/colorPrimary"
-            app:cardCornerRadius="20dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/atrasPasoTres"
-                    android:layout_width="132dp"
-                    android:layout_height="51dp"
-                    android:background="@drawable/buttonfinalizar"
-                    android:backgroundTint="@color/colorAccent"
-                    android:text="@string/atras"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.072"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.91" />
-
-                <Button
-                    android:id="@+id/siguienteTresCrearMedico"
-                    android:layout_width="132dp"
-                    android:layout_height="51dp"
-                    android:background="@drawable/buttonfinalizar"
-                    android:text="@string/siguiente"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.919"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.921" />
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="295dp"
-                    android:layout_height="68dp"
-                    android:background="@drawable/editnext"
-                    android:gravity="center"
-                    android:text="@string/textElegirTipoCitaDoctorAdmin"
-                    android:textColor="#FFFFFF"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.601"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.049" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/listaAreasAtencion"
-                    android:layout_width="349dp"
-                    android:layout_height="476dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/pasoDosMedico"
@@ -551,4 +441,100 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
+        <ImageButton
+            android:id="@+id/cancelarCrearMedico"
+            android:layout_width="63dp"
+            android:layout_height="59dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/cancelar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.031"
+            android:elevation="3dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/pasoCuatroMedico"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondovercitas"
+        android:visibility="invisible"
+        tools:visibility="invisible">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="20dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/crearMedico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/textCrear"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.938"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.947" />
+
+                <Button
+                    android:id="@+id/atrasPasoCuatro"
+                    android:layout_width="65dp"
+                    android:layout_height="49dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="@string/atras"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.057"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.938" />
+
+                <TextView
+                    android:id="@+id/textView152"
+                    android:layout_width="307dp"
+                    android:layout_height="122dp"
+                    android:background="@drawable/editnight"
+                    android:gravity="center"
+                    android:text="@string/textElegirCupoAdmin"
+                    android:textColor="#FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.659"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.027" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cuposCrearMedico"
+                    android:layout_width="357dp"
+                    android:layout_height="439dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.578"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.671" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

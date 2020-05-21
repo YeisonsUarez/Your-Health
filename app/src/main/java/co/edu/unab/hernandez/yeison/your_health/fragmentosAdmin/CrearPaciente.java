@@ -73,8 +73,7 @@ public class CrearPaciente extends Fragment {
     private CircleImageView fotoUser;
     private static final int PICK_IMAGE = 100;
     private static  final int TAKE_PHOTO=200;
-    private static final String CERO = "0";
-    private static final String BARRA = "/";
+
     private String name = "";
     Resources res;
     String[] tiposDocumentos ;
@@ -87,6 +86,8 @@ public class CrearPaciente extends Fragment {
     final int mes = c.get(Calendar.MONTH);
     final int dia = c.get(Calendar.DAY_OF_MONTH);
     final int anio = c.get(Calendar.YEAR);
+    private static final String CERO = "0";
+    private static final String BARRA = "/";
 
     Bitmap bitmap;
     ProgressDialog progreso;

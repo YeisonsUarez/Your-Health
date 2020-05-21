@@ -88,10 +88,10 @@
     <string name="textGaleria">Seleccionar foto de galeria</string>
     <string name="textCambiarContraseña">Cambiar contraseña</string>
     <string name="textModificar">Actualizar datos</string>
-    <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s ?.</string>
+    <string name="confrmarSeleccionTipoCita">¿Desea añadir %1$s a las areas de trabajo del medico %2$s?, acepte para añadir lugares y horas de atención al area de trabajo seleccionada.</string>
     <string name="confirmarSeleccionCupo"> Información de Cupo:\n Hora:  %1$s \n Lugar: %2$s\n ¿Desea añadirlo al medico %3$s ?</string>
-    <string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Al finalizar da click en siguiente.</string>
-    <string name="textElegirCupoAdmin">Por favor selecciona los cupos en los que el médico trabajará.\n Al finalizar da click en siguiente.</string>
+    <string name="textElegirTipoCitaDoctorAdmin"> Por favor selecciona las areas de atención\n del médico que quieres crear.\n Luego selecciona los cupos de atención.</string>
+    <string name="textElegirCupoAdmin">Por favor selecciona los cupos(horario de atención y lugar) que asignaras al medico que dara la cita seleccionada.\n Para finalizar la creación del médico selecciona crear, si desea añadir otra area de trabajo, seleccione atras.</string>
     <string name="textAgregadoCita">Se ha añadido a las areas de trabajado del médico.</string>
     <string name="textAgregadoCupo">Se ha añadido a los cupos del médico</string>
     <string name="crearCupo">Crear cupo</string>
@@ -102,16 +102,20 @@
 
     <!-- Strings database -->
 
-    <string name="nameServerD">192.168.1.13</string>
-    <string name="nameServer">dinamizate.000webhostapp.com</string>
+    <string name="nameServer">192.168.1.13</string>
+    <string name="nameServerD">dinamizate.000webhostapp.com</string>
     <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
     <string name="urlRegistroUsuario">http://%1$s/YourHealthWebService/registarUsuario.php</string>
+    <string name="urlRegistroUsuarioM">http://%1$s/YourHealthWebService/xdxdxdx.php</string>
+    <string name="obtenerDatos">http://%1$s/YourHealthWebService/obtenerDatos.php?entidad=%2$s&amp;institucion=%3$s</string>
     <string name="urlRegistroTipoCitaYCupo">http://%1$s/YourHealthWebService/registrocupoytipocita.php</string>
+    <string name="urlBase">http://%1$s/YourHealthWebService/</string>
     <string name="cargando">Cargando...</string>
     <string name="suarioNoEncontrado">No se encontro un usuario con las credeciales digitadas</string>
     <string name="bienvenido">Bienvenido %1$s</string>
     <string name="formato_fecha">dd/mm/yyyy</string>
     <string name="noDisponible">nodisponible</string>
+    <string name="aniosExp">Seleccione el numero de años de experiencia del Médico en esta area de atención</string>
     <string-array name="tiposDocumentos">
         <item>Seleccione un tipo de documento</item>
         <item>Registro Civil</item>
