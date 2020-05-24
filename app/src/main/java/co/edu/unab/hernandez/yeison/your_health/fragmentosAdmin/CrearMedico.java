@@ -297,9 +297,7 @@ public class CrearMedico extends Fragment {
 
     }
     public void nuevoMedico()
-    {    String json = new Gson().toJson(areaDeTrabajos);
-        System.out.println("_____________________________________________________________");
-        Log.i("DATOS",json);
+    {
         progreso=new ProgressDialog(getActivity());
         progreso.setMessage("Cargando...");
         progreso.show();
@@ -323,7 +321,7 @@ public class CrearMedico extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progreso.dismiss();
-                Toast.makeText(context, "No se ha podido guardar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "No se ha podido guardar"+error.getMessage(), Toast.LENGTH_LONG).show();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
             }
         }){
@@ -339,7 +337,7 @@ public class CrearMedico extends Fragment {
                 String contrasenaDoc=contrasena.getText().toString();
                 String telefonoDoc=telefono.getText().toString();
                 String intitucion= administrador.getInstitucion();
-                String tipoUSer= getResources().getString(R.string.textMedico);
+                String tipoUSer= context.getString(R.string.textMedico);
                 String descripcion= detalle.getText().toString();
                 String json = new Gson().toJson(areaDeTrabajos);
                 Map<String,String> parametros=new HashMap<>();
@@ -384,7 +382,7 @@ public class CrearMedico extends Fragment {
         progress.show();
 
 
-        String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"cupo",administrador.getInstitucion());
+        String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"cupo",administrador.getInstitucion(),"");
 
         jsonObjectRequest=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -466,7 +464,7 @@ public class CrearMedico extends Fragment {
         progress.show();
 
 
-        String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"tipocita",administrador.getInstitucion());
+        String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"tipocita",administrador.getInstitucion(),"");
 
 
         jsonObjectRequestTipoCita=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {

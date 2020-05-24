@@ -5,9 +5,10 @@ public class CitaMedica {
     private Paciente paciente;
     private Medico medico;
     private TipoCita tipoCita;
-    private int idCita;
+    private String idCita;
     private String  detallesCita, fechaCita,estadoCita;
     private Cupo cupo;
+    private  String fechaCreacion;
 
     public Administrador getAdministrador() {
         return administrador;
@@ -18,6 +19,22 @@ public class CitaMedica {
     }
 
     public CitaMedica() {
+    }
+
+    public String getIdCita() {
+        return idCita;
+    }
+
+    public void setIdCita(String idCita) {
+        this.idCita = idCita;
+    }
+
+    public String getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(String fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getEstadoCita() {
@@ -60,13 +77,6 @@ public class CitaMedica {
         this.tipoCita = tipoCita;
     }
 
-    public int getIdCita() {
-        return idCita;
-    }
-
-    public void setIdCita(int idCita) {
-        this.idCita = idCita;
-    }
 
     public String getDetallesCita() {
         return detallesCita;

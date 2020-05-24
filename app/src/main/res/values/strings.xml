@@ -107,7 +107,8 @@
     <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
     <string name="urlRegistroUsuario">http://%1$s/YourHealthWebService/registarUsuario.php</string>
     <string name="urlRegistroUsuarioM">http://%1$s/YourHealthWebService/xdxdxdx.php</string>
-    <string name="obtenerDatos">http://%1$s/YourHealthWebService/obtenerDatos.php?entidad=%2$s&amp;institucion=%3$s</string>
+    <string name="urlOperacionesCita">http://%1$s/YourHealthWebService/registocita.php</string>
+    <string name="obtenerDatos">http://%1$s/YourHealthWebService/obtenerDatos.php?entidad=%2$s&amp;institucion=%3$s&amp;extra=%4$s</string>
     <string name="urlRegistroTipoCitaYCupo">http://%1$s/YourHealthWebService/registrocupoytipocita.php</string>
     <string name="urlBase">http://%1$s/YourHealthWebService/</string>
     <string name="cargando">Cargando...</string>
@@ -116,6 +117,7 @@
     <string name="formato_fecha">dd/mm/yyyy</string>
     <string name="noDisponible">nodisponible</string>
     <string name="aniosExp">Seleccione el numero de años de experiencia del Médico en esta area de atención</string>
+    <string name="enespera">Esperando confirmacion</string>
     <string-array name="tiposDocumentos">
         <item>Seleccione un tipo de documento</item>
         <item>Registro Civil</item>
@@ -140,7 +142,7 @@
         <item>correoUsuario</item>
         <item>contrasenaUsuario</item>
         <item>telefonoUsuario</item>
-        <item>institucionUsuario</item>
+        <item>institucion</item>
         <item>fotoPerfilUsuario</item>
         <item>tipoUsuario</item>
     </string-array>

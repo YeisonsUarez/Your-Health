@@ -50,8 +50,8 @@ public class CitasMedicasAdapter extends RecyclerView.Adapter {
         CitasMedicasAdapter.ViewHolder viewHolder =(CitasMedicasAdapter.ViewHolder) holder;
         final CitaMedica citaMedica= citaMedicaArrayList.get(position);
         viewHolder.tipocita.setText(citaMedica.getTipoCita().getNombreTipoCita());
-        viewHolder.fechacita.setText(citaMedica.getFechaCita());
-        viewHolder.horacita.setText(citaMedica.getCupo().getFecha());
+        viewHolder.fechacita.setText(citaMedica.getFechaCita()+ " "+citaMedica.getCupo().getFecha());
+        viewHolder.horacita.setText(context.getString(R.string.textMedico)+": "+citaMedica.getMedico().getNombreUsuario());
         viewHolder.lugar.setText(citaMedica.getCupo().getLugar());
         viewHolder.estado.setText(citaMedica.getEstadoCita());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {

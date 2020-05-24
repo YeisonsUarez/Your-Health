@@ -3,11 +3,19 @@ package co.edu.unab.hernandez.yeison.your_health.modelos;
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
-    private String tipoDocumento, fechaNacimientoUsuario,sexo, telefono,tipoUsuario;
+    private String tipoDocumento, fechaNacimientoUsuario,sexo, telefono,tipoUsuario, fechaRegistro;
     private String numeroDocumento,nombreUsuario,correoUsuario,contrasenauUsuario,fotoPerfil, institucion;
 
     public String getInstitucion() {
         return institucion;
+    }
+
+    public String getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(String fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public void setInstitucion(String institucion) {

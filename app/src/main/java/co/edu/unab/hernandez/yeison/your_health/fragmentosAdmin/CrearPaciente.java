@@ -3,6 +3,7 @@ package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -73,7 +74,7 @@ public class CrearPaciente extends Fragment {
     private CircleImageView fotoUser;
     private static final int PICK_IMAGE = 100;
     private static  final int TAKE_PHOTO=200;
-
+    private Context context;
     private String name = "";
     Resources res;
     String[] tiposDocumentos ;
@@ -108,6 +109,7 @@ public class CrearPaciente extends Fragment {
         // Inflate the layout for this fragment
         view=inflater.inflate(R.layout.fragment_crear_paciente, container, false);
         asociarElementos();
+        context= getContext();
         admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
         res =getResources();
         tiposDocumentos= res.getStringArray(R.array.tiposDocumentos);
@@ -231,9 +233,9 @@ public class CrearPaciente extends Fragment {
                     passUser.setText("");
                     edadUser.setText("");
                     telefonoUser.setText("");
-                    Toast.makeText(getContext(),"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getContext(),"No se ha registrado "+response,Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"No se ha registrado "+response,Toast.LENGTH_LONG).show();
                     Log.i("RESPUESTA: ",""+response);
                 }
             }
@@ -241,10 +243,8 @@ public class CrearPaciente extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progreso.dismiss();
-
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
-                Toast.makeText(getContext(),"No se ha podido conectar"+error.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-                Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -259,7 +259,7 @@ public class CrearPaciente extends Fragment {
                 String contrasena=passUser.getText().toString();
                 String telefono=telefonoUser.getText().toString();
                 String intitucion= admin.getInstitucion();
-                String tipoUSer= getString(R.string.textPaciente);
+                String tipoUSer= context.getString(R.string.textPaciente);
                 Map<String,String> parametros=new HashMap<>();
                 parametros.put("numeroDocumento",numero);
                 parametros.put("tipoDocumento",tipoDoc);

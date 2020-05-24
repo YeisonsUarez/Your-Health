@@ -1,5 +1,7 @@
 package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,9 +18,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import co.edu.unab.hernandez.yeison.your_health.MainActivity;
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Administrador;
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +37,8 @@ public class PerfilAdmin extends Fragment {
     Button cerrarSesion, actualizarDatos;
     ImageButton cambiarfotoAdmin,cerrar;
     CircleImageView fotoAdmin;
+    private SharedPreferences LocalStorage;
+
 
     public PerfilAdmin() {
         // Required empty public constructor
@@ -46,6 +53,7 @@ public class PerfilAdmin extends Fragment {
         admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
         asociarElementos();
         anadirDatos();
+        operacionesBotones();
         return view;
     }
 
@@ -81,6 +89,18 @@ public class PerfilAdmin extends Fragment {
             @Override
             public void onClick(View view) {
                 getActivity().onBackPressed();
+            }
+        });
+        cerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocalStorage= getActivity().getSharedPreferences(getString(R.string.nameStorage),MODE_PRIVATE);
+                SharedPreferences.Editor edit= LocalStorage.edit();
+                edit.clear();
+                edit.apply();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

@@ -1,5 +1,7 @@
 package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +17,27 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
+import co.edu.unab.hernandez.yeison.your_health.adaptadores.MedicosAdapter;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.UsuariosAdapter;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Administrador;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Paciente;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Usuario;
+import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,9 +49,14 @@ public class Usuarios extends Fragment {
     private RecyclerView.LayoutManager manager;
     private ArrayList<Usuario> usuarios;
     private View view;
+    private ArrayList<Medico> medicos;
+    private ArrayList<Paciente> pacientes;
     private Administrador admin;
     private Switch tipoUsuarioSwitch;
     private FragmentTransaction transaction;
+    ProgressDialog progress;
+    Context context;
+    JsonObjectRequest jsonObjectRequestMedicos, jsonObjectRequestPacientes;
     Fragment crearPaciente, crearMedico, editarUsuario;
     public Usuarios() {
         // Required empty public constructor
@@ -51,6 +69,9 @@ public class Usuarios extends Fragment {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_usuarios, container, false);
         admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
+        context= getActivity();
+        Toast.makeText(context, ""+admin.getInstitucion(), Toast.LENGTH_SHORT).show();
+
        asociarElementos();
        operacionesDeBotones();
 
@@ -76,47 +97,19 @@ public class Usuarios extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
                 if(b){
-                 usuarios= new ArrayList<Usuario>();
-                 for( int i=0; i<=5;i++){
-                 Medico m= new Medico();
-                 m.setTelefono("12121");
-                 m.setFotoPerfil("https://ichef.bbci.co.uk/news/ws/410/amz/worldservice/live/assets/images/2015/09/07/150907151319_hannibal_624x351_nbc.jpg");
-                 m.setNombreUsuario("Hannibal");
-                 m.setTipoDocumento("C.C.");
-                 m.setNumeroDocumento("121212");
-                 m.setCorreoUsuario("hannibal@gmail.com");
-                 usuarios.add(m);
-                 iniciarDatos();
-                 }
+                    Toast.makeText(context, "Medicos registrados", Toast.LENGTH_SHORT).show();
+                    iniciarMedicos();
+
 
                 }else{
-                    usuarios= new ArrayList<Usuario>();
-                    Paciente m= new Paciente();
-                    for( int i=0; i<=5;i++){
-                        m.setTelefono("12121");
-                    m.setFotoPerfil("https://okdiario.com/img/series/2017/05/25/will-graham.jpg");
-                    m.setNombreUsuario("Will");
-                    m.setTipoDocumento("C.C.");
-                    m.setNumeroDocumento("121212");
-                    m.setCorreoUsuario("hannibal@gmail.com");
-                    usuarios.add(m);
-                    }
-                    iniciarDatos();
+                    Toast.makeText(context, "Pacientes registrados", Toast.LENGTH_SHORT).show();
+                    iniciarPacientes();
                 }
             }
         });
     }
-    private void iniciarDatos(){
-        UsuariosAdapter adapter= new UsuariosAdapter(usuarios, new UsuariosAdapter.onItemClickListener() {
-            @Override
-            public void onItemClick(Usuario usuario, int posicion) {
-                Toast.makeText(getContext(), usuario.getTipoUsuario(), Toast.LENGTH_SHORT).show();
-            }
-        }, getActivity());
-        adapter.notifyDataSetChanged();
-        listadeUsuarios.setAdapter(adapter);
-    }
-    public void mostrarFragmentCrearPaciente(){
+
+    private void mostrarFragmentCrearPaciente(){
         transaction= getActivity().getSupportFragmentManager().beginTransaction();
         if(crearPaciente!=null){
             transaction.replace(R.id.frameLayoutUsuarios,crearPaciente).addToBackStack(null).commit();
@@ -131,7 +124,7 @@ public class Usuarios extends Fragment {
         }
 
     }
-    public  void mostrarFragmentCrearMedico(){
+    private   void mostrarFragmentCrearMedico(){
         transaction= getActivity().getSupportFragmentManager().beginTransaction();
         if(crearMedico!=null){
             transaction.replace(R.id.frameLayoutUsuarios,crearMedico).addToBackStack(null).commit();
@@ -146,7 +139,139 @@ public class Usuarios extends Fragment {
         }
 
     }
+    private void iniciarMedicos(){
+            medicos= new ArrayList<>();
+            progress=new ProgressDialog(getContext());
+            progress.setMessage("Consultando Medico...");
+            progress.show();
+            String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"usuario",admin.getInstitucion(),context.getString(R.string.textMedico));
 
+            jsonObjectRequestMedicos=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Medico medico= null;
+                    progress.dismiss();
+                    JSONArray json=response.optJSONArray("usuario");
+                    try {
+
+                        for (int i=0;i<json.length();i++){
+                            medico=new Medico();
+                            JSONObject jsonObject=null;
+                            jsonObject=json.getJSONObject(i);
+
+                            medico.setNumeroDocumento(jsonObject.optString("numeroDocumento"));
+                            medico.setNombreUsuario(jsonObject.optString("nombreUsuario"));
+                            medico.setCorreoUsuario(jsonObject.optString("correoUsuario"));
+                            medico.setFotoPerfil(jsonObject.optString("fotoPerfilUsuario"));
+                            medico.setDescripcion(jsonObject.optString("descripcionMedico"));
+                            medico.setTelefono(jsonObject.optString("telefonoUsuario"));
+                            medico.setSexo(jsonObject.optString("sexoUsuario"));
+                            medico.setFechaRegistro(jsonObject.optString("fechaRegistro"));
+                            medico.setTipoDocumento(jsonObject.optString("tipoDocumento"));
+                            medico.setContrasenauUsuario(jsonObject.optString("contrasenaUsuario"));
+                            medico.setFechaNacimientoUsuario(jsonObject.optString("fechaNacimientoUsuario"));
+                            medicos.add(medico);
+                        }
+                        MedicosAdapter adapter= new MedicosAdapter(medicos, new MedicosAdapter.onItemClickListener() {
+                            @Override
+                            public void onItemClick(Medico medico, int posicion) {
+                                Toast.makeText(context, "Nombre:"+medico.getNombreUsuario(), Toast.LENGTH_SHORT).show();
+
+                            }
+                        }, getActivity());
+                        listadeUsuarios.setLayoutManager(manager);
+                        listadeUsuarios.setAdapter(adapter);
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                                " "+response, Toast.LENGTH_LONG).show();
+
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    progress.dismiss();
+                    Toast.makeText(getContext(), "No se puede conectar con Medico"+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
+                    System.out.println();
+                    Log.d("ERROR: ", error.toString()+error.getMessage());
+
+
+                }
+            });
+            // request.add(jsonObjectRequest);
+            VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequestMedicos);
+    }
+
+    private void iniciarPacientes(){
+        usuarios= new ArrayList<>();
+        progress=new ProgressDialog(getContext());
+        progress.setMessage("Consultando Paciente...");
+        progress.show();
+        String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"usuario",admin.getInstitucion(),context.getString(R.string.textPaciente));
+
+        jsonObjectRequestPacientes=new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Usuario usuario= null;
+                progress.dismiss();
+                JSONArray json=response.optJSONArray("usuario");
+                try {
+
+                    for (int i=0;i<json.length();i++){
+                        usuario=new Usuario();
+                        JSONObject jsonObject=null;
+                        jsonObject=json.getJSONObject(i);
+
+                        usuario.setNumeroDocumento(jsonObject.optString("numeroDocumento"));
+                        usuario.setNombreUsuario(jsonObject.optString("nombreUsuario"));
+                        usuario.setCorreoUsuario(jsonObject.optString("correoUsuario"));
+                        usuario.setFotoPerfil(jsonObject.optString("fotoPerfilUsuario"));
+                        usuario.setTelefono(jsonObject.optString("telefonoUsuario"));
+                        usuario.setSexo(jsonObject.optString("sexoUsuario"));
+                        usuario.setFechaRegistro(jsonObject.optString("fechaRegistro"));
+                        usuario.setTipoDocumento(jsonObject.optString("tipoDocumento"));
+                        usuario.setContrasenauUsuario(jsonObject.optString("contrasenaUsuario"));
+                        usuario.setFechaNacimientoUsuario(jsonObject.optString("fechaNacimientoUsuario"));
+                        usuarios.add(usuario);
+                    }
+                    UsuariosAdapter adapter= new UsuariosAdapter(usuarios, new UsuariosAdapter.onItemClickListener() {
+                        @Override
+                        public void onItemClick(Usuario usuario, int posicion) {
+                            Toast.makeText(context, "NombrePaciente"+usuario.getNombreUsuario(), Toast.LENGTH_SHORT).show();
+                        }
+                    },context);
+                    listadeUsuarios.setLayoutManager(manager);
+                    listadeUsuarios.setAdapter(adapter);
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                            " "+response, Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progress.dismiss();
+                Toast.makeText(getContext(), "No se puede conectar con pacientes"+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
+                System.out.println();
+                Log.d("ERROR: ", error.toString()+error.getMessage());
+
+
+            }
+        });
+        // request.add(jsonObjectRequest);
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequestPacientes);
+    }
     private void asociarElementos(){
         listadeUsuarios= view.findViewById(R.id.listaUsuarios);
         anadirUsuarios= view.findViewById(R.id.menuButton);

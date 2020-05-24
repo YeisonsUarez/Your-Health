@@ -1,23 +1,30 @@
 package co.edu.unab.hernandez.yeison.your_health.adaptadores;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
+import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MedicosAdapter extends RecyclerView.Adapter {
@@ -54,7 +61,12 @@ public class MedicosAdapter extends RecyclerView.Adapter {
         final Medico medico= medicos.get(position);
         viewHolder.nombre.setText(medico.getNombreUsuario());
         viewHolder.text_detalle.setText(medico.getDescripcion());
-        Glide.with(context).load(medico.getFotoPerfil()).dontAnimate().placeholder(new ColorDrawable(Color.WHITE)).into(viewHolder.fotoDoc);
+        if (medico.getFotoPerfil()!=null){
+            //
+            cargarImagenWebService(medico.getFotoPerfil(),viewHolder);
+        }else{
+            viewHolder.fotoDoc.setImageResource(R.drawable.camera);
+        }
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +75,25 @@ public class MedicosAdapter extends RecyclerView.Adapter {
         });
 
     }
+    private void cargarImagenWebService(String rutaImagen, final MedicosAdapter.ViewHolder holder) {
+        String urlImagen=context.getString(R.string.urlBase,context.getString(R.string.nameServer))+rutaImagen;
+        urlImagen=urlImagen.replace(" ","%20");
+
+        ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                holder.fotoDoc.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context,"Error al cargar la imagen",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //request.add(imageRequest);
+        VolleySingleton.getIntanciaVolley(context).addToRequestQueue(imageRequest);
+    }
+
 
 
     @Override
