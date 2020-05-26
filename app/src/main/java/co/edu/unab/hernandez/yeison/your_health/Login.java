@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -72,6 +73,7 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
         LocalStorage= getSharedPreferences(getString(R.string.nameStorage),MODE_PRIVATE);
         Boolean status= LocalStorage.getBoolean(getString(R.string.strStatus),false);
         String user= LocalStorage.getString(getString(R.string.idUser),"");

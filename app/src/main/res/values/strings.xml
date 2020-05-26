@@ -97,7 +97,17 @@
     <string name="crearCupo">Crear cupo</string>
     <string name="crearTipoCita">Regisrar tipo de Cita</string>
     <string name="verPerfil">Perfil</string>
-
+    <string name="detalleCita">Detalles de la cita medica seleccionada</string>
+    <string name="informaciontipocita">Información Tipo de cita</string>
+    <string name="cupo">Información Cupo</string>
+    <string name="aceptarCita">Aceptar Cita</string>
+    <string name="rechazarCita">Rechazar cita</string>
+    <string name="aprobado">Aprobado</string>
+    <string name="desaprobado">Desaprobado</string>
+    <string name="nombreMedicamento">Nombre del medicamento</string>
+    <string name="Dosis"></string>
+    <string name="cantidad">Cantidad</string>
+    <string name="detalleMedicamento">Por favor digite la dosis del medicamento y una breve descripción del mismo.</string>
 
 
     <!-- Strings database -->
@@ -110,7 +120,9 @@
     <string name="urlOperacionesCita">http://%1$s/YourHealthWebService/registocita.php</string>
     <string name="obtenerDatos">http://%1$s/YourHealthWebService/obtenerDatos.php?entidad=%2$s&amp;institucion=%3$s&amp;extra=%4$s</string>
     <string name="urlRegistroTipoCitaYCupo">http://%1$s/YourHealthWebService/registrocupoytipocita.php</string>
+    <string name="actualizarCita">http://%1$s/YourHealthWebService/actualizarestadocita.php?idcitamedica=%2$s&amp;estado=%3$s&amp;idAdministrador=%4$s</string>
     <string name="urlBase">http://%1$s/YourHealthWebService/</string>
+    <string name="obtenerCitasyMedicamentos">http://%1$s/YourHealthWebService/citasmedicopaciente.php?entidad=%2$s&amp;tipoUsuario=%3$s&amp;extra=%4$s&amp;institucion=%5$s</string>
     <string name="cargando">Cargando...</string>
     <string name="suarioNoEncontrado">No se encontro un usuario con las credeciales digitadas</string>
     <string name="bienvenido">Bienvenido %1$s</string>
@@ -118,6 +130,7 @@
     <string name="noDisponible">nodisponible</string>
     <string name="aniosExp">Seleccione el numero de años de experiencia del Médico en esta area de atención</string>
     <string name="enespera">Esperando confirmacion</string>
+    <string name="preguntaMedicamentos">¿Desea asignar medicamentos al paciente?</string>
     <string-array name="tiposDocumentos">
         <item>Seleccione un tipo de documento</item>
         <item>Registro Civil</item>

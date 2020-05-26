@@ -1,12 +1,17 @@
 package co.edu.unab.hernandez.yeison.your_health.fragmentosmedico;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +21,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -28,11 +44,13 @@ import co.edu.unab.hernandez.yeison.your_health.modelos.Cupo;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Paciente;
 import co.edu.unab.hernandez.yeison.your_health.modelos.TipoCita;
+import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VerCitas extends Fragment {
+public class VerCitas extends Fragment implements Response.ErrorListener, Response.Listener<JSONObject> {
     private Medico medico;
     private View view;
     private ArrayList<CitaMedica> citaMedicas;
@@ -40,6 +58,10 @@ public class VerCitas extends Fragment {
     private RecyclerView listaCitas;
     private RecyclerView.LayoutManager manager;
     private AlertDialog alert;
+    private JsonObjectRequest jsonObjectRequestCitas;
+    private ProgressDialog progress;
+    private Context context;
+    private StringRequest stringRequest;
 
 
     public VerCitas() {
@@ -54,55 +76,30 @@ public class VerCitas extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_ver_citas, container, false);
         manager = new LinearLayoutManager(getContext());
+        context= getContext();
         asociarElementos();
         iniciarListaCitas();
         return view;
     }
 
     private void iniciarListaCitas() {
-        agregarCitas();
-        CitasMedicasAdapter adapter = new CitasMedicasAdapter(citaMedicas, new CitasMedicasAdapter.onItemClickListener() {
-            @Override
-            public void onItemClick(CitaMedica citaMedica, int posicion) {
-                DetalleCita(citaMedica);
-            }
+        progress = new ProgressDialog(getContext());
+        progress.setMessage("Consultando citamedica...");
+        progress.show();
 
+        String url = getString(R.string.obtenerCitasyMedicamentos, getString(R.string.nameServer), "citamedica",context.getString(R.string.textMedico) , medico.getNumeroDocumento(),medico.getInstitucion());
 
-        }, getActivity());
-        listaCitas.setLayoutManager(manager);
-        listaCitas.setAdapter(adapter);
+        jsonObjectRequestCitas = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequestCitas);
     }
 
     public void asociarElementos() {
         listaCitas = view.findViewById(R.id.listCitasDoctor);
+        manager = new LinearLayoutManager(getContext());
+
     }
 
-    private void agregarCitas() {
-        citaMedicas = new ArrayList<>();
-        CitaMedica citaMedica = new CitaMedica();
-        Paciente paciente = new Paciente();
-        paciente.setTipoDocumento("Cedula");
-        paciente.setNumeroDocumento("12121");
-        paciente.setNombreUsuario("Elliot Alderson");
-        paciente.setCorreoUsuario("ygmail.com");
-        paciente.setFechaNacimientoUsuario("20");
-        paciente.setSexo("Masculino");
-        paciente.setFotoPerfil("https://cadenaser00.epimg.net/ser/imagenes/2015/03/31/television/1427762051_794989_1427763164_noticia_normal.jpg");
-        citaMedica.setPaciente(paciente);
-        citaMedica.setMedico(medico);
-        citaMedica.setEstadoCita(getString(R.string.textPendiente));
-        TipoCita tipoCita = new TipoCita();
-        tipoCita.setNombreTipoCita("Odontologia");
-        citaMedica.setTipoCita(tipoCita);
-        citaMedica.setFechaCita("23-agusto-2020");
-        Cupo cupo = new Cupo();
-        cupo.setLugar("Sala 3-1");
-        cupo.setFecha("3:00pm");
-        citaMedica.setCupo(cupo);
-        for (int i = 0; i < 8; i++) {
-            citaMedicas.add(citaMedica);
-        }
-    }
+
     private CitaMedica DetalleCita(final CitaMedica citaMedica){
         LayoutInflater inflater = getLayoutInflater();
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -113,7 +110,7 @@ public class VerCitas extends Fragment {
         ImageView foto;
         foto= dialoglayout.findViewById(R.id.fotoPerfilPaciente);
         correo= dialoglayout.findViewById(R.id.correoPacienteDoc);
-        Glide.with(getContext()).load(citaMedica.getPaciente().getFotoPerfil()).apply(RequestOptions.circleCropTransform()).into(foto);
+        cargarImagenWebService(citaMedica.getPaciente().getFotoPerfil(),foto);
         nombre= dialoglayout.findViewById(R.id.nombrePacienteDoc);
         edad= dialoglayout.findViewById(R.id.edadPacienteDoc);
         genero= dialoglayout.findViewById(R.id.generoDocumento);
@@ -146,9 +143,13 @@ public class VerCitas extends Fragment {
         terminarCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                alert.dismiss();
+                mostrarOpcionesMedicamentos(citaMedica);
+                actualizarCita(citaMedica,getString(R.string.citaFinalizada));
                 Toast.makeText(getContext(), getString(R.string.citaTerminada), Toast.LENGTH_LONG).show();
                 citaMedica.setEstadoCita(getString(R.string.citaFinalizada));
-                alert.dismiss();
+
+
             }
         });
         builder.setView(dialoglayout);
@@ -156,5 +157,148 @@ public class VerCitas extends Fragment {
         alert.show();
         //builder.show();
         return citaMedica;
+    }
+
+    private void mostrarOpcionesMedicamentos(CitaMedica citaMedica){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage(R.string.preguntaMedicamentos)
+                .setPositiveButton(R.string.aceptarCita, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // FIRE ZE MISSILES!
+                    }
+                })
+                .setNegativeButton(R.string.denegar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+        // Create the AlertDialog object and return it
+         builder.create();
+         builder.show();
+
+    }
+
+    @Override
+    public void onErrorResponse(VolleyError error) {
+        Toast.makeText(context, "Error al obtener citas", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onResponse(JSONObject response) {
+        CitaMedica citaMedica = null;
+        citaMedicas = new ArrayList<>();
+        Paciente paciente = null;
+        TipoCita tipoCita = null;
+        Cupo cupo = null;
+        progress.dismiss();
+        JSONArray json = response.optJSONArray("usuario");
+        try {
+
+            for (int i = 0; i < json.length(); i++) {
+                citaMedica = new CitaMedica();
+                paciente = new Paciente();
+                tipoCita = new TipoCita();
+                cupo = new Cupo();
+                JSONObject jsonObject = null;
+                jsonObject = json.getJSONObject(i);
+
+                citaMedica.setEstadoCita(jsonObject.optString("estadoCita"));
+                citaMedica.setFechaCita(jsonObject.optString("fechaCita"));
+                citaMedica.setDetallesCita(jsonObject.optString("detallesCita"));
+                citaMedica.setIdCita(jsonObject.optString("idCita"));
+                citaMedica.setFechaCreacion(jsonObject.getString("fechaCreacion"));
+                tipoCita.setUrlImagen(jsonObject.optString("urlImagenCita"));
+                tipoCita.setDetalleTipoCita(jsonObject.optString("detalleTipoCita"));
+                tipoCita.setNombreTipoCita(jsonObject.optString("nombreTipoCita"));
+                tipoCita.setIdTipo(jsonObject.optString("idTipoCita"));
+                citaMedica.setTipoCita(tipoCita);
+                cupo.setIdCupo(jsonObject.optString("idCupo"));
+                cupo.setFecha(jsonObject.optString("hora"));
+                cupo.setLugar(jsonObject.optString("lugar"));
+                cupo.setDisponible(jsonObject.optString("disponible"));
+                citaMedica.setCupo(cupo);
+                paciente.setNombreUsuario(jsonObject.optString("nombreUsuario"));
+                paciente.setCorreoUsuario(jsonObject.optString("correoUsuario"));
+                paciente.setFotoPerfil(jsonObject.optString("fotoPerfilUsuario"));
+                paciente.setTelefono(jsonObject.optString("telefonoUsuario"));
+                paciente.setSexo(jsonObject.optString("sexoUsuario"));
+                paciente.setTipoDocumento(jsonObject.optString("tipoDocumento"));
+                paciente.setFechaNacimientoUsuario(jsonObject.optString("fechaNacimientoUsuario"));
+                paciente.setNumeroDocumento(jsonObject.optString("numeroDocumento"));
+                citaMedica.setPaciente(paciente);
+                citaMedica.setMedico(medico);
+
+                citaMedicas.add(citaMedica);
+            }
+            CitasMedicasAdapter adapter = new CitasMedicasAdapter(citaMedicas, new CitasMedicasAdapter.onItemClickListener() {
+                @Override
+                public void onItemClick(CitaMedica citaMedica, int posicion) {
+                    DetalleCita(citaMedica);
+                }
+            }, context);
+            listaCitas.setLayoutManager(manager);
+            listaCitas.setAdapter(adapter);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "No se ha podido establecer conexión con el servidor" +
+                    " " + response, Toast.LENGTH_LONG).show();
+
+        }
+
+
+    }
+    private void cargarImagenWebService(String rutaImagen, ImageView circleImageView) {
+        String urlImagen = context.getString(R.string.urlBase, context.getString(R.string.nameServer)) + rutaImagen;
+        urlImagen = urlImagen.replace(" ", "%20");
+
+        ImageRequest imageRequest = new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                Glide.with(getContext()).load(response).apply(RequestOptions.circleCropTransform()).into(circleImageView);
+
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error al cargar la imagen", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //request.add(imageRequest);
+        VolleySingleton.getIntanciaVolley(context).addToRequestQueue(imageRequest);
+    }
+    private void actualizarCita(CitaMedica citaMedica, String estado) {
+        progress = new ProgressDialog(getContext());
+        progress.setMessage("Guardando...");
+        progress.show();
+
+
+        String url = getString(R.string.actualizarCita, getString(R.string.nameServer), citaMedica.getIdCita(),estado,medico.getNumeroDocumento());
+
+        stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progress.dismiss();
+
+                if (response.trim().equalsIgnoreCase("registra")){
+                    Toast.makeText(context,context.getString(R.string.aprobado),Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"No se ha registrado "+response,Toast.LENGTH_LONG).show();
+                    Log.i("RESPUESTA: ",""+response);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progress.dismiss();
+                Log.i("ERRORVOLLEY: ",""+error.getMessage());
+                Toast.makeText(context,"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);
     }
 }

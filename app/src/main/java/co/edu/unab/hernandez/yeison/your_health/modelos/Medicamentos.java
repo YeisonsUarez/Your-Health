@@ -1,13 +1,13 @@
 package co.edu.unab.hernandez.yeison.your_health.modelos;
 
 public class Medicamentos {
-    private String nombreMedicamento, detalleMedicamento, cantidadMedicamento,dosisMedicamento;
+    private String nombreMedicamento, detalleMedicamento, cantidadMedicamento;
 
-    public Medicamentos(String nombreMedicamento, String detalleMedicamento, String cantidadMedicamento, String dosisMedicamento) {
+    public Medicamentos(String nombreMedicamento, String detalleMedicamento, String cantidadMedicamento) {
         this.nombreMedicamento = nombreMedicamento;
         this.detalleMedicamento = detalleMedicamento;
         this.cantidadMedicamento = cantidadMedicamento;
-        this.dosisMedicamento = dosisMedicamento;
+
     }
 
     public String getNombreMedicamento() {
@@ -34,11 +34,5 @@ public class Medicamentos {
         this.cantidadMedicamento = cantidadMedicamento;
     }
 
-    public String getDosisMedicamento() {
-        return dosisMedicamento;
-    }
 
-    public void setDosisMedicamento(String dosisMedicamento) {
-        this.dosisMedicamento = dosisMedicamento;
-    }
 }

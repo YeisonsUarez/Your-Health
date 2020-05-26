@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavOptions;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -110,6 +112,7 @@ public class Usuarios extends Fragment {
     }
 
     private void mostrarFragmentCrearPaciente(){
+
         transaction= getActivity().getSupportFragmentManager().beginTransaction();
         if(crearPaciente!=null){
             transaction.replace(R.id.frameLayoutUsuarios,crearPaciente).addToBackStack(null).commit();
@@ -121,7 +124,16 @@ public class Usuarios extends Fragment {
             transaction.add(R.id.frameLayoutUsuarios,crearPaciente);
             transaction.addToBackStack(null);
             transaction.commit();
-        }
+            }
+        /*
+        NavOptions.Builder navOptionsBuilder = new NavOptions.Builder();
+        navOptionsBuilder.setEnterAnim(R.anim.slide_in_right);
+        navOptionsBuilder.setExitAnim(R.anim.slide_out_left);
+        navOptionsBuilder.setPopEnterAnim(R.anim.slide_in_left);
+        navOptionsBuilder.setPopExitAnim(R.anim.slide_out_right);
+        final NavOptions options = navOptionsBuilder.build();
+        NavHostFragment.findNavController(this).navigate(R.id.crearPacienteAdm,null,options);
+*/
 
     }
     private   void mostrarFragmentCrearMedico(){

@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/fondoperfil"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/cerrarvercita"
+            android:layout_width="76dp"
+            android:layout_height="67dp"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/cancelar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingTop="20dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="20dp">
+
+            <Button
+                android:id="@+id/aceptarCita"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editnext"
+                android:text="@string/aceptarCita"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/rechazarCita"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editback"
+                android:text="@string/rechazarCita"
+                android:textColor="#F44336"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/citaCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="18dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtcita"
+                    android:layout_width="105dp"
+                    android:layout_height="19dp"
+                    android:gravity="center"
+                    android:text="informacioncita"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.76"
+                    app:layout_constraintStart_toStartOf="@+id/imagecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/fechacreaciontxt"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/nombre"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/imagecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+
+                <TextView
+                    android:id="@+id/fechayhoracitatxt"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textFecha"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/imagecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.715" />
+
+                <TextView
+                    android:id="@+id/detallevitatxt"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textTelefono"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/imagecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/estadocitatxt"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="estado"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/imagecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.423" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imagecita"
+                    android:layout_width="141dp"
+                    android:layout_height="154dp"
+                    android:layout_marginEnd="270dp"
+                    android:src="@drawable/icono"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.073" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/pacienteCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="18dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtPaciente"
+                    android:layout_width="105dp"
+                    android:layout_height="19dp"
+                    android:gravity="center"
+                    android:text="@string/textPaciente"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.76"
+                    app:layout_constraintStart_toStartOf="@+id/fotopacientecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/nombrepacientecita"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/nombre"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/fotopacientecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+
+                <TextView
+                    android:id="@+id/emailpacientecita"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textemail"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/fotopacientecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.715" />
+
+                <TextView
+                    android:id="@+id/telpacientecita"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textTelefono"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/fotopacientecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/numeropacientecita"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textNumeroDoc"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/fotopacientecita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.423" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fotopacientecita"
+                    android:layout_width="141dp"
+                    android:layout_height="154dp"
+                    android:layout_marginEnd="270dp"
+                    android:src="@drawable/fotoperfildoctor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.073" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/medicoCarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="18dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtmedicocita"
+                    android:layout_width="105dp"
+                    android:layout_height="19dp"
+                    android:gravity="center"
+                    android:text="@string/textMedico"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.76"
+                    app:layout_constraintStart_toStartOf="@+id/fotomedicocita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/nombremedicocita"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/nombre"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/fotomedicocita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+
+                <TextView
+                    android:id="@+id/emailmedicocita"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textemail"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/fotomedicocita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.715" />
+
+                <TextView
+                    android:id="@+id/telmedicocita"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textTelefono"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/fotomedicocita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/numeroMedicocita"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/textNumeroDoc"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/fotomedicocita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.423" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fotomedicocita"
+                    android:layout_width="141dp"
+                    android:layout_height="154dp"
+                    android:layout_marginEnd="270dp"
+                    android:src="@drawable/fotoperfildoctor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.073" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/tipocitacardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="18dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txttipococita"
+                    android:layout_width="200dp"
+                    android:layout_height="19dp"
+                    android:gravity="center"
+                    android:text="@string/informaciontipocita"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.76"
+                    app:layout_constraintStart_toStartOf="@+id/fototipocitacita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/nombretipocita"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/nombre"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/fototipocitacita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+
+                <TextView
+                    android:id="@+id/detaletipocita"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/detalle"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/fototipocitacita"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.715" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/fototipocitacita"
+                    android:layout_width="141dp"
+                    android:layout_height="154dp"
+                    android:layout_marginEnd="270dp"
+                    android:src="@drawable/fotoperfildoctor"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.073" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cupocardview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="18dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/txtcupo"
+                    android:layout_width="200dp"
+                    android:layout_height="19dp"
+                    android:gravity="center"
+                    android:text="@string/cupo"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.76"
+                    app:layout_constraintStart_toStartOf="@+id/cupofotocardview"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/lugarCupo"
+                    android:layout_width="186dp"
+                    android:layout_height="24dp"
+                    android:gravity="center|center_vertical"
+                    android:text="@string/nombre"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.863"
+                    app:layout_constraintStart_toStartOf="@+id/cupofotocardview"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.2" />
+
+                <TextView
+                    android:id="@+id/hora"
+                    android:layout_width="184dp"
+                    android:layout_height="24dp"
+                    android:gravity="center"
+                    android:text="@string/detalle"
+                    android:textColor="#FFFFFF"
+                    android:textColorHighlight="#FFFFFF"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.854"
+                    app:layout_constraintStart_toStartOf="@+id/cupofotocardview"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.715" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/cupofotocardview"
+                    android:layout_width="141dp"
+                    android:layout_height="154dp"
+                    android:layout_marginEnd="270dp"
+                    android:src="@drawable/cupos"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.073" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
