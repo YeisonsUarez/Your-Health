@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,11 +42,11 @@ import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.CitasMedicasAdapter;
 import co.edu.unab.hernandez.yeison.your_health.modelos.CitaMedica;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Cupo;
+import co.edu.unab.hernandez.yeison.your_health.modelos.Medicamento;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Paciente;
 import co.edu.unab.hernandez.yeison.your_health.modelos.TipoCita;
 import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -145,9 +146,6 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
             public void onClick(View view) {
                 alert.dismiss();
                 mostrarOpcionesMedicamentos(citaMedica);
-                actualizarCita(citaMedica,getString(R.string.citaFinalizada));
-                Toast.makeText(getContext(), getString(R.string.citaTerminada), Toast.LENGTH_LONG).show();
-                citaMedica.setEstadoCita(getString(R.string.citaFinalizada));
 
 
             }
@@ -164,17 +162,50 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         builder.setMessage(R.string.preguntaMedicamentos)
                 .setPositiveButton(R.string.aceptarCita, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
+                        mostrarDialogMedicamento(citaMedica);
                     }
                 })
                 .setNegativeButton(R.string.denegar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
+                        actualizarCita(citaMedica,getString(R.string.citaFinalizada));
+                        Toast.makeText(context, context.getString(R.string.citaTerminada), Toast.LENGTH_LONG).show();
+                        citaMedica.setEstadoCita(getString(R.string.citaFinalizada));                    }
                 });
         // Create the AlertDialog object and return it
          builder.create();
          builder.show();
+
+    }
+    public void mostrarDialogMedicamento(CitaMedica citaMedica){
+        LayoutInflater inflater = getLayoutInflater();
+        ArrayList<Medicamento> listaMedicamentos= new ArrayList<>();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final View dialoglayout = inflater.inflate(R.layout.dialoganadirmedicamento, null);
+        final EditText nombre, detalle, cantidad;
+        Button anadirMedicamento,guardar;
+        ImageButton salir;
+        RecyclerView recyclerView= dialoglayout.findViewById(R.id.medicamentosagregados);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        nombre= dialoglayout.findViewById(R.id.nombremedicamento);
+        detalle=dialoglayout.findViewById(R.id.detallemedicamento);
+        cantidad= dialoglayout.findViewById(R.id.cantidadmedicamento);
+        anadirMedicamento= dialoglayout.findViewById(R.id.anadirmedicamentos);
+        guardar= dialoglayout.findViewById(R.id.guardar);
+        salir=dialoglayout.findViewById(R.id.cerrarmedicamentos);
+        anadirMedicamento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Medicamento medicamento = new Medicamento(nombre.getText().toString(),detalle.getText().toString(),cantidad.getText().toString());
+                listaMedicamentos.add(medicamento);
+
+            }
+        });
+
+
+        builder.setView(dialoglayout);
+        alert = builder.create();
+        alert.show();
+
 
     }
 

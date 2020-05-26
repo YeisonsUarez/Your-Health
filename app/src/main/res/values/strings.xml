@@ -108,6 +108,7 @@
     <string name="Dosis"></string>
     <string name="cantidad">Cantidad</string>
     <string name="detalleMedicamento">Por favor digite la dosis del medicamento y una breve descripción del mismo.</string>
+    <string name="guardarCambios">Enviar</string>
 
 
     <!-- Strings database -->
@@ -130,7 +131,7 @@
     <string name="noDisponible">nodisponible</string>
     <string name="aniosExp">Seleccione el numero de años de experiencia del Médico en esta area de atención</string>
     <string name="enespera">Esperando confirmacion</string>
-    <string name="preguntaMedicamentos">¿Desea asignar medicamentos al paciente?</string>
+    <string name="preguntaMedicamentos">¿Desea asignar medicamento al paciente?</string>
     <string-array name="tiposDocumentos">
         <item>Seleccione un tipo de documento</item>
         <item>Registro Civil</item>

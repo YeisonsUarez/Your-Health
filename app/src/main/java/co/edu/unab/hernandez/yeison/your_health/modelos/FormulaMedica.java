@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class FormulaMedica {
     private String fechaEntrega, fechaMaximaEntrega,lugarPedido;
     private CitaMedica citaMedica;
-    private ArrayList<Medicamentos> medicamentos;
+    private ArrayList<Medicamento> medicamentos;
 
-    public FormulaMedica(String fechaEntrega, String fechaMaximaEntrega, String lugarPedido, CitaMedica citaMedica, ArrayList<Medicamentos> medicamentos) {
+    public FormulaMedica(String fechaEntrega, String fechaMaximaEntrega, String lugarPedido, CitaMedica citaMedica, ArrayList<Medicamento> medicamentos) {
         this.fechaEntrega = fechaEntrega;
         this.fechaMaximaEntrega = fechaMaximaEntrega;
         this.lugarPedido = lugarPedido;
@@ -47,11 +47,11 @@ public class FormulaMedica {
         this.citaMedica = citaMedica;
     }
 
-    public ArrayList<Medicamentos> getMedicamentos() {
+    public ArrayList<Medicamento> getMedicamentos() {
         return medicamentos;
     }
 
-    public void setMedicamentos(ArrayList<Medicamentos> medicamentos) {
+    public void setMedicamentos(ArrayList<Medicamento> medicamentos) {
         this.medicamentos = medicamentos;
     }
 }
