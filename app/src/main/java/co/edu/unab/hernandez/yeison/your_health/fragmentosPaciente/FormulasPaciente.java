@@ -52,6 +52,7 @@ public class FormulasPaciente extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_formulas_paciente, container, false);
+        context= getActivity();
         paciente= (Paciente) getArguments().getSerializable(getString(R.string.textPaciente));
         asociarElentos();
         cargarDatos();
