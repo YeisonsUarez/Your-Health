@@ -195,7 +195,7 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         anadirMedicamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Medicamento medicamento = new Medicamento(nombre.getText().toString(),detalle.getText().toString(),cantidad.getText().toString());
+                Medicamento medicamento = new Medicamento(nombre.getText().toString(),detalle.getText().toString(),cantidad.getText().toString(),citaMedica.getMedico(),citaMedica.getPaciente());
                 listaMedicamentos.add(medicamento);
 
             }
