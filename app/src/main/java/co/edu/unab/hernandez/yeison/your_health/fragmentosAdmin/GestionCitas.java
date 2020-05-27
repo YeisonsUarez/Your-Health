@@ -241,6 +241,7 @@ public class GestionCitas extends Fragment implements Response.ErrorListener, Re
                         @Override
                         public void onClick(View view) {
                             actualizarCita(citaMedica,context.getString(R.string.aprobado));
+                            citaMedicas.remove(posicion);
                             alert.dismiss();
                         }
                     });

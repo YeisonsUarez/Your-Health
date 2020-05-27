@@ -2,6 +2,7 @@ package co.edu.unab.hernandez.yeison.your_health.fragmentosAdmin;
 
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -73,7 +74,7 @@ public class CrearCitasYCupos extends Fragment {
 
     StringRequest stringRequest;
 
-
+    Context context;
 
     StringRequest stringRequestCupo;
 
@@ -87,7 +88,9 @@ public class CrearCitasYCupos extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_crear_citas_y_cupos, container, false);
+        context= getActivity();
         admin= (Administrador) getArguments().getSerializable(getString(R.string.idAdmin));
+        Toast.makeText(context, "Institucion"+admin.getInstitucion(), Toast.LENGTH_LONG).show();
         asociarElementos();
         operacionesClick();
         return view;
@@ -181,7 +184,11 @@ public class CrearCitasYCupos extends Fragment {
         crearC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                guardarCupo(hora.getText().toString(),lugar.getText().toString());
+                if(hora.getText().toString().isEmpty() || lugar.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), getContext().getString(R.string.errorDatosVacios), Toast.LENGTH_SHORT).show();
+                }else{
+                    guardarCupo(hora.getText().toString(),lugar.getText().toString());
+                }
                 alert.dismiss();
             }
         });
@@ -198,9 +205,6 @@ public class CrearCitasYCupos extends Fragment {
         LayoutInflater inflaterTipo = getLayoutInflater();
         final AlertDialog.Builder builderTipo = new AlertDialog.Builder(getContext());
         final View dialoglayoutTipo = inflaterTipo.inflate(R.layout.itemtipocita, null);
-
-        //dialoglayoutTipo.setMinimumHeight(400);
-        //dialoglayoutTipo.setMinimumWidth(400);
         final EditText nombreTipo,detalleTipo;
         Button crearTipo;
         ImageButton tomarFotoTipo;
@@ -222,7 +226,12 @@ public class CrearCitasYCupos extends Fragment {
         crearTipo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                guardarTipoCita(nombreTipo.getText().toString(),detalleTipo.getText().toString());
+                if(detalleTipo.getText().toString().isEmpty() || nombreTipo.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), getContext().getString(R.string.errorDatosVacios), Toast.LENGTH_SHORT).show();
+                }else{
+                    guardarTipoCita(nombreTipo.getText().toString(),detalleTipo.getText().toString());
+
+                }
                 alterTipoCita.dismiss();
             }
         });
@@ -266,7 +275,7 @@ public class CrearCitasYCupos extends Fragment {
         progreso.show();
 
 
-        String url= getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
+        String url= context.getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
 
         stringRequestCupo=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
@@ -319,7 +328,7 @@ public class CrearCitasYCupos extends Fragment {
         progreso.show();
 
 
-        String url= getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
+        String url= context.getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
 
         stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
 
@@ -339,7 +348,6 @@ public class CrearCitasYCupos extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 progreso.dismiss();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
-                Toast.makeText(getContext(),"No se ha podido conectar"+error.getLocalizedMessage(),Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
         }){

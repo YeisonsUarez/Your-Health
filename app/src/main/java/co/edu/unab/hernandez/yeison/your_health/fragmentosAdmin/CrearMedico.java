@@ -569,7 +569,7 @@ public class CrearMedico extends Fragment {
 
     }
     private void obtenerFecha(){
-         DatePickerDialog recogerFecha = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog recogerFecha = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 //Esta variable lo que realiza es aumentar en uno el mes ya que comienza desde 0 = enero
@@ -580,8 +580,6 @@ public class CrearMedico extends Fragment {
                 String mesFormateado = (mesActual < 10)? CERO + String.valueOf(mesActual):String.valueOf(mesActual);
                 //Muestro la fecha con el formato deseado
                 edadDoc.setText(diaFormateado + BARRA + mesFormateado + BARRA + year);
-
-
 
 
             }
