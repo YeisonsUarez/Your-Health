@@ -59,13 +59,11 @@ public class HorariosPaciente extends Fragment {
     private ArrayList<Cupo> cupos;
     private ArrayList<TipoCita> listaTiposCitas;
     private CitaMedica citaMedica;
-    private Switch switchTipoCita;
     private Button siguienteUno,atrasUno,atrasDos,atrasTipoCita;
     private CalendarView calendarView;
     private Paciente paciente;
     private ConstraintLayout pasoUno,pasoDos,pasoTres,pasoCuatro;
     private RecyclerView medicosList,horasList,tipoCitasEs;
-    private ProgressDialog progress;
     private JsonObjectRequest jsonObjectRequestMedicos;
     private JsonObjectRequest jsonObjectRequestTipoCita;
     private JsonObjectRequest jsonObjectRequestCupos;
@@ -97,7 +95,6 @@ public class HorariosPaciente extends Fragment {
 
 
     private void asignarObjetos() {
-        switchTipoCita= view.findViewById(R.id.tipoCita);
         siguienteUno= view.findViewById(R.id.siguienteUno);
         atrasUno= view.findViewById(R.id.atrasUno);
         atrasDos= view.findViewById(R.id.atrasDos);
@@ -122,9 +119,7 @@ public class HorariosPaciente extends Fragment {
 
     private void iniciarRecyclerHoras() {
         cupos= new ArrayList<>();
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultando cupos...");
-        progress.show();
+
         String idTipocita=citaMedica.getTipoCita().getIdTipo();
         String idMedico= citaMedica.getMedico().getNumeroDocumento();
         String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"cupo",idMedico,idTipocita);
@@ -133,7 +128,7 @@ public class HorariosPaciente extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Cupo cupo= null;
-                progress.dismiss();
+
                 JSONArray json=response.optJSONArray("usuario");
                 try {
 
@@ -172,7 +167,6 @@ public class HorariosPaciente extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Toast.makeText(getContext(), "No se puede conectar "+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
                 System.out.println();
                 Log.d("ERROR: ", error.toString()+error.getMessage());
@@ -188,9 +182,6 @@ public class HorariosPaciente extends Fragment {
 
     private void iniciarRecyclerTipoCita() {
         medicos= new ArrayList<>();
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultando Tipo Cita...");
-        progress.show();
 
 
         String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"tipocita",paciente.getInstitucion(),"");
@@ -200,7 +191,6 @@ public class HorariosPaciente extends Fragment {
             public void onResponse(JSONObject response) {
                 listaTiposCitas= new ArrayList<>();
                 TipoCita tipoCita= null;
-                progress.dismiss();
                 JSONArray json=response.optJSONArray("usuario");
                 try {
 
@@ -239,7 +229,6 @@ public class HorariosPaciente extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Toast.makeText(getContext(), "No se puede conectar "+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
                 System.out.println();
                 Log.d("ERROR: ", error.toString()+error.getMessage());
@@ -258,9 +247,7 @@ public class HorariosPaciente extends Fragment {
 
     private void inicarRecyclerMedicos() {
         medicos= new ArrayList<>();
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultando Medico...");
-        progress.show();
+
 
         String idTipocita= citaMedica.getTipoCita().getIdTipo();
         String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"medico",paciente.getInstitucion(),idTipocita);
@@ -269,7 +256,6 @@ public class HorariosPaciente extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Medico medico= null;
-                progress.dismiss();
                 JSONArray json=response.optJSONArray("usuario");
                 try {
 
@@ -315,7 +301,6 @@ public class HorariosPaciente extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Toast.makeText(getContext(), "No se puede conectar "+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
                 System.out.println();
                 Log.d("ERROR: ", error.toString()+error.getMessage());
@@ -339,6 +324,8 @@ public class HorariosPaciente extends Fragment {
                 .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         crearCita();
+                        pasoTres.setVisibility(View.INVISIBLE);
+                        pasoUno.setVisibility(View.VISIBLE);
                     }
                 })
                 .setNegativeButton(R.string.denegar, new DialogInterface.OnClickListener() {
@@ -352,9 +339,6 @@ public class HorariosPaciente extends Fragment {
     }
     private void crearCita(){
 
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Cargando...");
-        progress.show();
 
 
         String url= getString(R.string.urlOperacionesCita,getString(R.string.nameServer));
@@ -363,7 +347,6 @@ public class HorariosPaciente extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                progress.dismiss();
 
                 if (response.trim().equalsIgnoreCase("registra")){
                     Toast.makeText(getContext(),"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
@@ -375,7 +358,6 @@ public class HorariosPaciente extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getLocalizedMessage(),Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
@@ -425,18 +407,16 @@ public class HorariosPaciente extends Fragment {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String selectedDate = sdf.format(new Date(calendarView.getDate()));
                 citaMedica.setFechaCita(selectedDate);
-                if(switchTipoCita.isChecked()){
 
-                    switchTipoCita.setVisibility(View.INVISIBLE);
+                /*    switchTipoCita.setVisibility(View.INVISIBLE);
                     pasoUno.setVisibility(View.INVISIBLE);
                     pasoDos.setVisibility(View.VISIBLE);
                     TipoCita tipoCitaMedica = new TipoCita("22",getString(R.string.nombreGeneral),getString(R.string.detalleGeneral),getString(R.string.UrlCitaGeneral));
                     citaMedica.setTipoCita(tipoCitaMedica);
-                }else{
-                    switchTipoCita.setVisibility(View.INVISIBLE);
+                */
                     pasoUno.setVisibility(View.INVISIBLE);
                     pasoCuatro.setVisibility(View.VISIBLE);
-                }
+
 
 
             }
@@ -445,7 +425,6 @@ public class HorariosPaciente extends Fragment {
             @Override
             public void onClick(View view) {
                 pasoDos.setVisibility(View.INVISIBLE);
-                switchTipoCita.setVisibility(View.VISIBLE);
                 pasoUno.setVisibility(View.VISIBLE);
             }
         });
@@ -460,7 +439,6 @@ public class HorariosPaciente extends Fragment {
             @Override
             public void onClick(View view) {
                 pasoCuatro.setVisibility(View.INVISIBLE);
-                switchTipoCita.setVisibility(View.VISIBLE);
                 pasoUno.setVisibility(View.VISIBLE);
 
             }

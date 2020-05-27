@@ -11,34 +11,6 @@
         android:background="@drawable/horarios"
         >
 
-        <Switch
-            android:id="@+id/tipoCita"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:width="20dp"
-            android:elevation="4dp"
-            android:ellipsize="middle"
-            android:gravity="start"
-            android:scrollbarSize="4dp"
-            android:showText="true"
-            android:textAlignment="gravity"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="#FFFFFF"
-            android:textColorHint="@color/colorPrimaryDark"
-            android:textOff="@string/tipoUno"
-            android:textOn="@string/tipoDos"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.764"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.096"
-            app:showText="true"
-            app:switchPadding="1px"
-            app:switchTextAppearance="@style/TextAppearance.AppCompat.Body1" />
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="393dp"
@@ -229,19 +201,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="227dp"
-            android:layout_height="91dp"
-            android:gravity="left|center_vertical"
-            android:text="@string/tipocita"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.222"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.025" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -98,8 +98,7 @@ public class CrearMedico extends Fragment {
     String[] tiposDocumentos ;
     String[] tipoSexo;
     String aniosExp;
-    ProgressDialog progress;
-    ProgressDialog progreso;
+
     // RequestQueue request;
 
 
@@ -298,9 +297,6 @@ public class CrearMedico extends Fragment {
     }
     public void nuevoMedico()
     {
-        progreso=new ProgressDialog(getActivity());
-        progreso.setMessage("Cargando...");
-        progreso.show();
 
 
         String url= getString(R.string.urlRegistroUsuarioM,getString(R.string.nameServer));
@@ -309,7 +305,6 @@ public class CrearMedico extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                progreso.dismiss();
                 if (response.trim().contains("registra")){
                     Toast.makeText(context, "Se han guardado los datos.", Toast.LENGTH_SHORT).show();
                 }else{
@@ -320,7 +315,6 @@ public class CrearMedico extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progreso.dismiss();
                 Toast.makeText(context, "No se ha podido guardar"+error.getMessage(), Toast.LENGTH_LONG).show();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
             }
@@ -377,9 +371,6 @@ public class CrearMedico extends Fragment {
     private void agregarCupos() {
         cupos= new ArrayList<>();
 
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultandocupo...");
-        progress.show();
 
 
         String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"cupo",administrador.getInstitucion(),"");
@@ -388,7 +379,6 @@ public class CrearMedico extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Cupo cupo= null;
-                progress.dismiss();
                 JSONArray json=response.optJSONArray("usuario");
                 try {
 
@@ -445,7 +435,6 @@ public class CrearMedico extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Toast.makeText(getContext(), "No se puede conectar "+error.toString()+error.getMessage(), Toast.LENGTH_LONG).show();
                 System.out.println();
                 Log.d("ERROR: ", error.toString()+error.getMessage());
@@ -459,9 +448,6 @@ public class CrearMedico extends Fragment {
     }
     private void  addTipoCitas(){
         listaTiposCitasArray= new ArrayList<>();
-        progress=new ProgressDialog(getContext());
-        progress.setMessage("Consultando...cita");
-        progress.show();
 
 
         String url=getString(R.string.obtenerDatos,getString(R.string.nameServer),"tipocita",administrador.getInstitucion(),"");
@@ -471,7 +457,6 @@ public class CrearMedico extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 TipoCita tipoCita= null;
-                progress.dismiss();
                 JSONArray json=response.optJSONArray("usuario");
 
                 try {
@@ -554,7 +539,6 @@ public class CrearMedico extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Toast.makeText(getContext(), "No se puede conectar "+error.toString(), Toast.LENGTH_LONG).show();
                 System.out.println();
                 Log.d("ERROR: ", error.toString());

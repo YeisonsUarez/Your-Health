@@ -11,18 +11,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/horarios">
 
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="312dp"
-            android:layout_height="78dp"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.024" />
-
         <androidx.cardview.widget.CardView
             android:layout_width="381dp"
             android:layout_height="608dp"
@@ -32,6 +20,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.869" />
+            app:layout_constraintVertical_bias="0.495" >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listamedicamentosP"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

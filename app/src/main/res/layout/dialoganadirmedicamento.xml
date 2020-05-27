@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/tool">
+    android:layout_height="720dp"
+    android:background="@drawable/tool"
+    android:minHeight="720dp">
 
     <EditText
         android:id="@+id/detallemedicamento"
         android:layout_width="344dp"
         android:layout_height="98dp"
+        android:autofillHints=""
         android:background="@drawable/editnight"
         android:ems="10"
         android:gravity="center"
@@ -18,17 +20,18 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/medicamentosagregados"
+        app:layout_constraintBottom_toBottomOf="@+id/medicamentosagregados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.79" />
+        app:layout_constraintVertical_bias="0.292" />
 
     <EditText
         android:id="@+id/nombremedicamento"
         android:layout_width="336dp"
         android:layout_height="50dp"
+        android:autofillHints=""
         android:background="@drawable/editnight"
         android:ems="10"
         android:gravity="center"
@@ -37,17 +40,18 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/medicamentosagregados"
+        app:layout_constraintBottom_toBottomOf="@+id/medicamentosagregados"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.413"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248" />
+        app:layout_constraintVertical_bias="0.091" />
 
     <EditText
         android:id="@+id/cantidadmedicamento"
         android:layout_width="340dp"
         android:layout_height="43dp"
+        android:autofillHints=""
         android:background="@drawable/editnight"
         android:ems="10"
         android:gravity="center"
@@ -56,12 +60,12 @@
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/medicamentosagregados"
+        app:layout_constraintBottom_toBottomOf="@+id/medicamentosagregados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.436"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.453" />
+        app:layout_constraintVertical_bias="0.194" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medicamentosagregados"
@@ -79,6 +83,7 @@
         android:layout_width="65dp"
         android:layout_height="67dp"
         android:background="@android:color/transparent"
+        android:contentDescription="TODO"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +99,7 @@
         android:layout_width="127dp"
         android:layout_height="42dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/textCrear"
+        android:text="@string/anadir"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

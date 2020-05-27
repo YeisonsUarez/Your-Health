@@ -109,12 +109,14 @@
     <string name="cantidad">Cantidad</string>
     <string name="detalleMedicamento">Por favor digite la dosis del medicamento y una breve descripción del mismo.</string>
     <string name="guardarCambios">Enviar</string>
+    <string name="anadir">Añadir</string>
 
 
     <!-- Strings database -->
 
     <string name="nameServerD">192.168.1.6</string>
     <string name="nameServer">dinamizate.000webhostapp.com</string>
+    <string name="gestionMedicamentos">http://%1$s/YourHealthWebService/registromedicamento.php?tipoConsulta=%2$s&amp;extra=%3$s</string>
     <string name="urlLogin">http://%1$s/YourHealthWebService/loginUsuario.php?tipoDocumento=%2$s&amp;numeroDocumento=%3$s&amp;contrasenaUsuario=%4$s</string>
     <string name="urlRegistroUsuario">http://%1$s/YourHealthWebService/registarUsuario.php</string>
     <string name="urlRegistroUsuarioM">http://%1$s/YourHealthWebService/xdxdxdx.php</string>

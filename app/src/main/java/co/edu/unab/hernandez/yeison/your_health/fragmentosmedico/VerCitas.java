@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -31,12 +32,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.CitasMedicasAdapter;
@@ -56,14 +60,14 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
     private Medico medico;
     private View view;
     private ArrayList<CitaMedica> citaMedicas;
-
+    private ArrayList<Medicamento> medicamentos;
     private RecyclerView listaCitas;
     private RecyclerView.LayoutManager manager;
     private AlertDialog alert;
     private JsonObjectRequest jsonObjectRequestCitas;
-    private ProgressDialog progress;
     private Context context;
     private StringRequest stringRequest;
+    private StringRequest stringRequestMedicamentos;
 
 
     public VerCitas() {
@@ -79,15 +83,13 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         view = inflater.inflate(R.layout.fragment_ver_citas, container, false);
         manager = new LinearLayoutManager(getContext());
         context= getContext();
+        medicamentos= new ArrayList<>();
         asociarElementos();
         iniciarListaCitas();
         return view;
     }
 
     private void iniciarListaCitas() {
-        progress = new ProgressDialog(getContext());
-        progress.setMessage("Consultando citamedica...");
-        progress.show();
 
         String url = getString(R.string.obtenerCitasyMedicamentos, getString(R.string.nameServer), "citamedica",context.getString(R.string.textMedico) , medico.getNumeroDocumento(),medico.getInstitucion());
 
@@ -161,8 +163,9 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
     private void mostrarOpcionesMedicamentos(CitaMedica citaMedica){
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage(R.string.preguntaMedicamentos)
-                .setPositiveButton(R.string.aceptarCita, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.confirmar, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        actualizarCita(citaMedica,getString(R.string.citaFinalizada));
                         mostrarDialogMedicamento(citaMedica);
                     }
                 })
@@ -187,7 +190,9 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         ImageButton salir;
         RecyclerView recyclerView= dialoglayout.findViewById(R.id.medicamentosagregados);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(manager);
+        LinearLayoutManager llm = new LinearLayoutManager(context);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
         nombre= dialoglayout.findViewById(R.id.nombremedicamento);
         detalle=dialoglayout.findViewById(R.id.detallemedicamento);
         cantidad= dialoglayout.findViewById(R.id.cantidadmedicamento);
@@ -199,6 +204,9 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
             public void onClick(View view) {
                 Medicamento medicamento = new Medicamento(nombre.getText().toString(),detalle.getText().toString(),cantidad.getText().toString(),citaMedica.getMedico(),citaMedica.getPaciente());
                 listaMedicamentos.add(medicamento);
+                nombre.setText("");
+                detalle.setText("");
+                cantidad.setText("");
                 MedicamentosAdapter adapter= new MedicamentosAdapter(listaMedicamentos, new MedicamentosAdapter.onItemClickListener() {
                     @Override
                     public void onItemClick(Medicamento medicamento, int posicion) {
@@ -233,8 +241,33 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
     }
 
     private void guardarMedicamento(ArrayList<Medicamento> medicamentos){
+        String json = new Gson().toJson(medicamentos);
 
-        Toast.makeText(context, ""+medicamentos.get(0).getNombreMedicamento(), Toast.LENGTH_SHORT).show();
+        String strMedicamentos = getString(R.string.gestionMedicamentos, getString(R.string.nameServer), "registro",json);
+
+        stringRequestMedicamentos = new StringRequest(Request.Method.GET, strMedicamentos, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (response.trim().equalsIgnoreCase("registra")){
+                    Toast.makeText(context,context.getString(R.string.aprobado),Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(context,"No se ha registrado "+response,Toast.LENGTH_LONG).show();
+                    Log.i("RESPUESTA: ",""+response);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("ERRORVOLLEY: ",""+error.getMessage());
+                Toast.makeText(context,"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+        stringRequestMedicamentos.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequestMedicamentos);
+
 
     }
     @Override
@@ -250,7 +283,6 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         Paciente paciente = null;
         TipoCita tipoCita = null;
         Cupo cupo = null;
-        progress.dismiss();
         JSONArray json = response.optJSONArray("usuario");
         try {
 
@@ -329,9 +361,6 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         VolleySingleton.getIntanciaVolley(context).addToRequestQueue(imageRequest);
     }
     private void actualizarCita(CitaMedica citaMedica, String estado) {
-        progress = new ProgressDialog(getContext());
-        progress.setMessage("Guardando...");
-        progress.show();
 
 
         String url = getString(R.string.actualizarCita, getString(R.string.nameServer), citaMedica.getIdCita(),estado,medico.getNumeroDocumento());
@@ -339,7 +368,6 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progress.dismiss();
 
                 if (response.trim().equalsIgnoreCase("registra")){
                     Toast.makeText(context,context.getString(R.string.aprobado),Toast.LENGTH_SHORT).show();
@@ -352,7 +380,6 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progress.dismiss();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
                 Toast.makeText(context,"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
@@ -361,4 +388,5 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(stringRequest);
     }
+
 }

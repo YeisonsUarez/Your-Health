@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,7 @@ public class MedicamentosAdapter extends RecyclerView.Adapter {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
-        public EditText nombre,detalle, cantidad;
+        public TextView nombre,detalle, cantidad;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombre= itemView.findViewById(R.id.itemnombremedicamento);
@@ -46,9 +47,9 @@ public class MedicamentosAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ViewHolder viewHolder =(ViewHolder)holder;
         final Medicamento medicamento= medicamentos.get(position);
-        viewHolder.nombre.setText(medicamento.getNombreMedicamento());
+        viewHolder.nombre.setText(viewHolder.nombre.getText().toString()+ " "+medicamento.getNombreMedicamento());
         viewHolder.detalle.setText(medicamento.getDetalleMedicamento());
-        viewHolder.cantidad.setText(medicamento.getCantidadMedicamento());
+        viewHolder.cantidad.setText(viewHolder.cantidad.getText().toString() +" "+medicamento.getCantidadMedicamento());
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

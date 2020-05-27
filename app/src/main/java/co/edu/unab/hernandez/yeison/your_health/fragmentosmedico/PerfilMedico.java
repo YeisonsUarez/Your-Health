@@ -2,6 +2,7 @@ package co.edu.unab.hernandez.yeison.your_health.fragmentosmedico;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -12,10 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.bumptech.glide.Glide;
 
 import co.edu.unab.hernandez.yeison.your_health.Login;
@@ -23,6 +28,7 @@ import co.edu.unab.hernandez.yeison.your_health.MainActivity;
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medico;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Paciente;
+import co.edu.unab.hernandez.yeison.your_health.modelos.VolleySingleton;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -60,9 +66,27 @@ public class PerfilMedico extends Fragment {
         tipoDocYNumDOC.setText(medico.getTipoDocumento()+medico.getNumeroDocumento());
         correoDOC.setText(medico.getCorreoUsuario());
         telefonoDOC.setText(medico.getTelefono());
-        Glide.with(getActivity()).load(medico.getFotoPerfil()).dontAnimate().placeholder(new ColorDrawable(Color.WHITE)).into(circleImageViewDOC);
+        cargarImagenWebService(medico.getFotoPerfil());
 
 
+    }
+    private void cargarImagenWebService(String rutaImagen) {
+        String urlImagen=getString(R.string.urlBase,getString(R.string.nameServer))+rutaImagen;
+        urlImagen=urlImagen.replace(" ","%20");
+
+        ImageRequest imageRequest=new ImageRequest(urlImagen, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                circleImageViewDOC.setImageBitmap(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER, null, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(),"Error al cargar la imagen",Toast.LENGTH_SHORT).show();
+            }
+        });
+        //request.add(imageRequest);
+        VolleySingleton.getIntanciaVolley(getActivity()).addToRequestQueue(imageRequest);
     }
 
     private void operacionesBotones(){

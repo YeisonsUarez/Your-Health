@@ -91,7 +91,6 @@ public class CrearPaciente extends Fragment {
     private static final String BARRA = "/";
 
     Bitmap bitmap;
-    ProgressDialog progreso;
     // RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
 
@@ -213,9 +212,6 @@ public class CrearPaciente extends Fragment {
     }
 
     public void guardarDatos(){
-        progreso=new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
-        progreso.show();
 
 
         String url= getString(R.string.urlRegistroUsuario,getString(R.string.nameServer));
@@ -224,7 +220,6 @@ public class CrearPaciente extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                progreso.dismiss();
 
                 if (response.trim().equalsIgnoreCase("registra")){
                     numeroDoc.setText("");
@@ -242,7 +237,6 @@ public class CrearPaciente extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progreso.dismiss();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
                 Toast.makeText(context,"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
             }

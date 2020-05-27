@@ -69,7 +69,6 @@ public class CrearCitasYCupos extends Fragment {
     Uri imageUri;
     Bitmap bitmap;
 
-    ProgressDialog progreso;
     // RequestQueue request;
 
     StringRequest stringRequest;
@@ -270,9 +269,7 @@ public class CrearCitasYCupos extends Fragment {
     }
 
     public void guardarCupo(final String horaCupo, final String lugarCupo){
-        progreso=new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
-        progreso.show();
+
 
 
         String url= context.getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
@@ -281,7 +278,6 @@ public class CrearCitasYCupos extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                progreso.dismiss();
 
                 if (response.trim().equalsIgnoreCase("registra")){
                     Toast.makeText(getContext(),"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
@@ -293,7 +289,6 @@ public class CrearCitasYCupos extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progreso.dismiss();
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getLocalizedMessage(),Toast.LENGTH_LONG).show();
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
@@ -323,9 +318,6 @@ public class CrearCitasYCupos extends Fragment {
     }
 
     public void guardarTipoCita(final String nombre, final String detalle){
-        progreso=new ProgressDialog(getContext());
-        progreso.setMessage("Cargando...");
-        progreso.show();
 
 
         String url= context.getString(R.string.urlRegistroTipoCitaYCupo,getString(R.string.nameServer));
@@ -334,7 +326,7 @@ public class CrearCitasYCupos extends Fragment {
 
             @Override
             public void onResponse(String response) {
-                progreso.dismiss();
+
 
                 if (response.trim().equalsIgnoreCase("registra")){
                     Toast.makeText(getContext(),"Se ha registrado con exito",Toast.LENGTH_SHORT).show();
@@ -346,7 +338,7 @@ public class CrearCitasYCupos extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progreso.dismiss();
+
                 Log.i("ERRORVOLLEY: ",""+error.getMessage());
                 Toast.makeText(getContext(),"No se ha podido conectar"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
