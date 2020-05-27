@@ -70,6 +70,7 @@ public class CitasPaciente extends Fragment implements Response.ErrorListener, R
         view= inflater.inflate(R.layout.fragment_citas_paciente, container, false);
         paciente= (Paciente) getArguments().getSerializable(getString(R.string.textPaciente));
         manager = new LinearLayoutManager(getContext());
+        context= getActivity();
         asociarElementos();
         iniciarListaCitas();
         return view;
@@ -80,7 +81,7 @@ public class CitasPaciente extends Fragment implements Response.ErrorListener, R
         progress.setMessage("Consultando citamedica...");
         progress.show();
 
-        String url = getString(R.string.obtenerCitasyMedicamentos, getString(R.string.nameServer), "citamedica",context.getString(R.string.textPaciente) , paciente.getNumeroDocumento(),paciente.getInstitucion());
+        String url = context.getString(R.string.obtenerCitasyMedicamentos, getString(R.string.nameServer), "citamedica",context.getString(R.string.textPaciente) , paciente.getNumeroDocumento(),paciente.getInstitucion());
 
         jsonObjectRequestCitas = new JsonObjectRequest(Request.Method.GET, url, null, this, this);
         VolleySingleton.getIntanciaVolley(getContext()).addToRequestQueue(jsonObjectRequestCitas);

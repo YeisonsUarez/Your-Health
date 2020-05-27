@@ -29,16 +29,16 @@ public class MedicamentosAdapter extends RecyclerView.Adapter {
         public EditText nombre,detalle, cantidad;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombre= itemView.findViewById(R.id.textHora);
-            detalle= itemView.findViewById(R.id.textLugar);
-            cantidad= itemView.findViewById(R.id.textLugar);
+            nombre= itemView.findViewById(R.id.itemnombremedicamento);
+            detalle= itemView.findViewById(R.id.itemdetallemedicamento);
+            cantidad= itemView.findViewById(R.id.itemcantidadmedicamento);
 
         }
     }
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View mivista= LayoutInflater.from(parent.getContext()).inflate(R.layout.itemhora,parent,false);
+        View mivista= LayoutInflater.from(parent.getContext()).inflate(R.layout.itemmedicamento,parent,false);
         return new ViewHolder(mivista);
     }
 

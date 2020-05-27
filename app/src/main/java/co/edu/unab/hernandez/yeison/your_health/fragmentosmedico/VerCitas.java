@@ -40,6 +40,7 @@ import java.util.ArrayList;
 
 import co.edu.unab.hernandez.yeison.your_health.R;
 import co.edu.unab.hernandez.yeison.your_health.adaptadores.CitasMedicasAdapter;
+import co.edu.unab.hernandez.yeison.your_health.adaptadores.MedicamentosAdapter;
 import co.edu.unab.hernandez.yeison.your_health.modelos.CitaMedica;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Cupo;
 import co.edu.unab.hernandez.yeison.your_health.modelos.Medicamento;
@@ -186,6 +187,7 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
         ImageButton salir;
         RecyclerView recyclerView= dialoglayout.findViewById(R.id.medicamentosagregados);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(manager);
         nombre= dialoglayout.findViewById(R.id.nombremedicamento);
         detalle=dialoglayout.findViewById(R.id.detallemedicamento);
         cantidad= dialoglayout.findViewById(R.id.cantidadmedicamento);
@@ -197,10 +199,31 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
             public void onClick(View view) {
                 Medicamento medicamento = new Medicamento(nombre.getText().toString(),detalle.getText().toString(),cantidad.getText().toString(),citaMedica.getMedico(),citaMedica.getPaciente());
                 listaMedicamentos.add(medicamento);
+                MedicamentosAdapter adapter= new MedicamentosAdapter(listaMedicamentos, new MedicamentosAdapter.onItemClickListener() {
+                    @Override
+                    public void onItemClick(Medicamento medicamento, int posicion) {
+                        Toast.makeText(context, "Agregado", Toast.LENGTH_SHORT).show();
+                    }
+                },context);
+                recyclerView.setAdapter(adapter);
 
             }
         });
+        salir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert.dismiss();
+            }
+        });
 
+        guardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Se guardaron los medicamentos", Toast.LENGTH_SHORT).show();
+                guardarMedicamento(listaMedicamentos);
+                alert.dismiss();
+            }
+        });
 
         builder.setView(dialoglayout);
         alert = builder.create();
@@ -209,10 +232,16 @@ public class VerCitas extends Fragment implements Response.ErrorListener, Respon
 
     }
 
+    private void guardarMedicamento(ArrayList<Medicamento> medicamentos){
+
+        Toast.makeText(context, ""+medicamentos.get(0).getNombreMedicamento(), Toast.LENGTH_SHORT).show();
+
+    }
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(context, "Error al obtener citas", Toast.LENGTH_SHORT).show();
     }
+
 
     @Override
     public void onResponse(JSONObject response) {
