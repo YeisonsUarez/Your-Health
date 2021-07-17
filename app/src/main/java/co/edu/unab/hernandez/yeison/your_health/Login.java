@@ -146,12 +146,15 @@ public class Login extends AppCompatActivity implements Response.ErrorListener, 
         spinnerTipoDoc.setAdapter(adaptador);
     }
     private void iniciarValidacion(String tipoDocumento, String numeroDocumento,String contrasena){
-
-        String urlLogin=getString(R.string.urlLogin, getString(R.string.nameServer),tipoDocumento,numeroDocumento,contrasena);
+        Intent intent= new Intent(Login.this, InicioPaciente.class);
+        intent.putExtra(getString(R.string.textPaciente),new Paciente());
+        startActivity(intent);
+        finish();
+        /*String urlLogin=getString(R.string.urlLogin, getString(R.string.nameServer),tipoDocumento,numeroDocumento,contrasena);
         urlLogin= urlLogin.replace(" ","%20"); //cambia los espacios en blanco por porcentaje 20 para que el servidor los lea
         jsonObjectRequest= new JsonObjectRequest(Request.Method.GET, urlLogin, null,this,this);
         VolleySingleton.getIntanciaVolley(Login.this).addToRequestQueue(jsonObjectRequest);
-
+        */
     }
 
     @Override
